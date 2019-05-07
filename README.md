@@ -1,4 +1,4 @@
-#Save My Grade
+# Save My Grade
 
 ### Installation
  * S'assurer d'avoir [Node.js](https://nodejs.org/) et un [JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
