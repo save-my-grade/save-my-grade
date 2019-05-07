@@ -8,14 +8,15 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
     "typescript": "^3.4.5",
-    "node-sass": "^4.12.0"
+    "node-sass": "^4.12.0",
+    "bulma": "^0.7.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "rimraf ../public && react-scripts build && ncp build ../public && rimraf build",
     "test": "react-scripts tests",
     "eject": "react-scripts eject",
-    "scss": "node-sass --watch public/scss -o public/css"
+    "scss": "node-sass --watch src/styles/scss -o src/styles/css"
   },
   "proxy": "http://localhost:9000",
   "eslintConfig": {

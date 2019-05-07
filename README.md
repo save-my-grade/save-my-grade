@@ -24,7 +24,7 @@
 ```
 * Pour modifier les fichiers de style:
      1. Lancer `npm run scss` depuis le dossier `/ui`
-     2. Faire les changements de style dans le dossier `/ui/public/scss`
+     2. Faire les changements de style dans le dossier `/ui/src/styles/scss`
 
 ### Sources
 Structure du code très inspirée de [Java Play React Seed](https://github.com/yohangz/java-play-react-seed).
