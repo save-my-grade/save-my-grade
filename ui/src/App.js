@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './Logo_Small.png';
 import './App.css';
+import Clock from "./Components/Clock";
 
 function App() {
     return (
@@ -10,6 +11,7 @@ function App() {
                 <p>
                     Save My Grade
                 </p>
+                <Clock />
             </header>
         </div>
     );

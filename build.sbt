@@ -1,5 +1,6 @@
 name := """save-my-grade"""
-organization := "com.example"
+organization := "fr.savemygrade"
+maintainer := "marin.godechot@isep.fr"
 
 version := "1.0-SNAPSHOT"
 
