@@ -1,11 +1,11 @@
 # Save My Grade
 
 ### Installation
- * S'assurer d'avoir [Node.js](https://nodejs.org/) et un [JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+ * S'assurer d'avoir [npm](https://www.npmjs.com/) et un [JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
  * Cloner ce dépôt.
  
 ### Utilisation
- * Ce projet utilise [SBT](http://www.scala-sbt.org/) ainsi que des scripts pour y associer la partie frontend contenue dans le dossier `/ui`, les commandes à utiliser sont les suivantes :
+ * Ce projet utilise [SBT](http://www.scala-sbt.org/) ainsi que des scripts pour y associer la partie frontend contenue dans le dossier `/ui`. Les commandes possibles sont les suivantes :
  ```
      sbt clean           # Clean existing build artifacts
  
@@ -17,7 +17,7 @@
  
      sbt test            # Run both backend and frontend unit tests
  ```
- * TL;DR :
+ * Les commandes les plus utiles :
 ```
     sbt run  ==> Lance le back et le front en local en mode dev pour voir les changements en direct
     sbt test ==> Lance les tests unitaires front et back
