@@ -22,6 +22,9 @@
     sbt run  ==> Lance le back et le front en local en mode dev pour voir les changements en direct
     sbt test ==> Lance les tests unitaires front et back
 ```
+* Pour modifier les fichiers de style:
+     1. Lancer `npm run scss` depuis le dossier `/ui`
+     2. Faire les changements de style dans le dossier `/ui/public/scss`
 
 ### Sources
 Structure du code très inspirée de [Java Play React Seed](https://github.com/yohangz/java-play-react-seed).
