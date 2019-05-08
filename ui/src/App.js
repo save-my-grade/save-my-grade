@@ -1,20 +1,17 @@
 import React from 'react';
-import Clock from "./components/Clock";
-import 'bulma/css/bulma.css';
+import { BrowserRouter as Router, Route} from "react-router-dom";
 import './styles/css/styles.css';
-import logo from './images/logo.png';
+import TestPage from "./pages/TestPage";
+import TestHub from "./pages/TestHub";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <h1 className="title is-1 has-text-primary">
-                    Save My Grade
-                </h1>
-                <Clock />
-            </header>
-        </div>
+        <Router>
+            <Route path="/" exact component={TestHub} />
+            <Route path="/test/" component={TestPage} />
+            <Route path="/login/" component={LoginPage} />
+        </Router>
     );
 }
 
