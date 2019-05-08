@@ -26,11 +26,28 @@ body {
 .App-link {
   color: #61dafb; }
 
-#page-container {
+.login-logo {
+  max-width: 40% !important;
+  min-width: 300px;
+  filter: drop-shadow(0 0 0.5rem white); }
+
+img {
+  user-select: none; }
+
+#login-background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: white url(https://www.isep.fr/wp-content/uploads/2018/01/mf-photo-9002-11.jpg) no-repeat fixed center center;
+  background-size: cover;
+  filter: blur(8px);
+  z-index: -9000; }
+
+.page-container {
   position: relative;
   min-height: 100vh; }
 
-#content-wrap {
+.content-wrap {
   padding-bottom: 2.5rem;
   /* Footer height */ }
 
