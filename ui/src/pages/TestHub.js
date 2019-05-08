@@ -19,6 +19,9 @@ function TestHub() {
                                 <Link to="/login/">Login page</Link>
                             </li>
                             <li>
+                                <Link to="/home/">Home page</Link>
+                            </li>
+                            <li>
                                 <Link to="/test/">Test page</Link>
                             </li>
                         </ul>
