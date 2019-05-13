@@ -9,6 +9,12 @@ function HomePage() {
         isActive ? setActive(false) : setActive(true);
     }
 
+    const [selectedCycle, setSelectedCycle] = useState("prep");
+
+    function selectCycle(str) {
+        setSelectedCycle("str");
+    }
+
     useEffect(() => {
         document.body.classList.add('has-navbar-fixed-top');
         return function cleanup() {
@@ -42,6 +48,14 @@ function HomePage() {
             </nav>
             <div className="page-content" style={{paddingTop: 40}}>
                 <h1 className="title">Matières</h1>
+                <div className="buttons has-addons">
+                    <span className={classNames("button", {"is-info is-selected": selectedCycle === "prep"})}
+                          onClick={() => setSelectedCycle("prep")}>Prépa</span>
+                    <span className={classNames("button", {"is-info is-selected": selectedCycle === "cii"})}
+                          onClick={() => setSelectedCycle("cii")}>CII</span>
+                    <span className={classNames("button", {"is-info is-selected": selectedCycle === "ing"})}
+                          onClick={() => setSelectedCycle("ing")}>Cycle ingénieur</span>
+                </div>
             </div>
         </div>
     );
