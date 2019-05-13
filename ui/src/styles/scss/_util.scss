@@ -1,0 +1,10 @@
+// Source : https://www.sitepoint.com/better-solution-managing-z-index-sass/
+@function z($layer) {
+  $z-layers: (
+          "background": -9000
+  );
+  @if not map-has-key($z-layers, $layer) {
+    @warn "No layer found for `#{$layer}` in $z-layers map. Property omitted.";
+  }
+  @return map-get($z-layers, $layer);
+}
