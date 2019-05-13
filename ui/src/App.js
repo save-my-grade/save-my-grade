@@ -4,6 +4,7 @@ import './styles/css/styles.css';
 import TestPage from "./pages/TestPage";
 import TestHub from "./pages/TestHub";
 import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
             <Route path="/" exact component={TestHub}/>
             <Route path="/test/" component={TestPage}/>
             <Route path="/login/" component={LoginPage}/>
+            <Route path="/home/" component={HomePage}/>
         </Router>
     );
 }
