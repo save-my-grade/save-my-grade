@@ -18,4 +18,5 @@ function Clock() {
 
     return <h3 className="title is-3 has-text-danger">It is now {date.toLocaleTimeString()}</h3>;
 }
+
 export default Clock;
