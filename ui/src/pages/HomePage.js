@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import logo from "../images/logo_text.png"
 import classNames from "classnames";
 import PropTypes from 'prop-types';
+import CourseLink from "../components/CourseLink";
 
 
 function HomePage() {
@@ -29,8 +30,8 @@ function HomePage() {
     }
 
     CycleButton.propTypes = {
-        code: PropTypes.string,
-        text: PropTypes.string
+        code: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired
     };
 
     return (
@@ -42,17 +43,17 @@ function HomePage() {
                         <img src={logo} alt="logo"/>
                     </a>
 
-                    <a role="button" className={classNames("navbar-burger burger", {"is-active": isActive})}
-                       aria-label="menu" aria-expanded="false"
-                       data-target="navbarMenu" onClick={toggleMenu}>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
+                    <span role="button" className={classNames("navbar-burger burger", {"is-active": isActive})}
+                          aria-label="menu" aria-expanded="false"
+                          data-target="navbarMenu" onClick={toggleMenu}>
+                        <span aria-hidden="true"/>
+                        <span aria-hidden="true"/>
+                        <span aria-hidden="true"/>
+                    </span>
                 </div>
                 <div id="navbarMenu" className={classNames("navbar-menu", {"is-active": isActive})}>
                     <div className="navbar-end">
-                        <a className="navbar-item">
+                        <a href="#" className="navbar-item">
                             Ajouter une fiche
                         </a>
                     </div>
@@ -68,7 +69,8 @@ function HomePage() {
                     </div>
                 </section>
                 <section className="section">
-                    <a className="button is-medium is-fullwidth">Physique</a>
+                    <CourseLink to="#" text="Physique"/>
+                    <CourseLink to="#" text="Mathématiques"/>
                 </section>
             </div>
         </div>
