@@ -3,6 +3,7 @@ import logo from "../images/logo_text.png"
 import classNames from "classnames";
 import PropTypes from 'prop-types';
 import CourseLink from "../components/CourseLink";
+import Avatar from 'react-avatar';
 
 
 function HomePage() {
@@ -55,6 +56,9 @@ function HomePage() {
                     <div className="navbar-end">
                         <a href="#" className="navbar-item">
                             Ajouter une fiche
+                        </a>
+                        <a href="#" className="navbar-item">
+                            <Avatar name="Mark Zuckerberg" round={true} size={40}/>
                         </a>
                     </div>
                 </div>
