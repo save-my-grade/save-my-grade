@@ -10,7 +10,8 @@
     "typescript": "^3.4.5",
     "node-sass": "^4.12.0",
     "bulma": "^0.7.4",
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "prop-types": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

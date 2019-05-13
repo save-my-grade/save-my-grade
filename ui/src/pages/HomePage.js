@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import logo from "../images/logo_text.png"
 import classNames from "classnames";
+import PropTypes from 'prop-types';
+
 
 function HomePage() {
     const [isActive, setActive] = useState(false);
@@ -11,16 +13,26 @@ function HomePage() {
 
     const [selectedCycle, setSelectedCycle] = useState("prep");
 
-    function selectCycle(str) {
-        setSelectedCycle("str");
-    }
-
     useEffect(() => {
         document.body.classList.add('has-navbar-fixed-top');
         return function cleanup() {
             document.body.classList.remove('has-navbar-fixed-top');
         }
     });
+
+    function CycleButton(props) {
+        const {code, text} = props;
+        return (
+            <span className={classNames("button", {"is-info is-selected": selectedCycle === code})}
+                  onClick={() => setSelectedCycle(code)}>{text}</span>
+        );
+    }
+
+    CycleButton.propTypes = {
+        code: PropTypes.string,
+        text: PropTypes.string
+    };
+
     return (
         <div>
             <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation"
@@ -46,16 +58,18 @@ function HomePage() {
                     </div>
                 </div>
             </nav>
-            <div className="page-content" style={{paddingTop: 40}}>
-                <h1 className="title">Matières</h1>
-                <div className="buttons has-addons">
-                    <span className={classNames("button", {"is-info is-selected": selectedCycle === "prep"})}
-                          onClick={() => setSelectedCycle("prep")}>Prépa</span>
-                    <span className={classNames("button", {"is-info is-selected": selectedCycle === "cii"})}
-                          onClick={() => setSelectedCycle("cii")}>CII</span>
-                    <span className={classNames("button", {"is-info is-selected": selectedCycle === "ing"})}
-                          onClick={() => setSelectedCycle("ing")}>Cycle ingénieur</span>
-                </div>
+            <div className="page-content">
+                <section className="section">
+                    <h1 className="title">Matières</h1>
+                    <div className="buttons has-addons">
+                        <CycleButton code="prep" text="Prépa"/>
+                        <CycleButton code="cii" text="CII"/>
+                        <CycleButton code="ing" text="Cycle ingénieur"/>
+                    </div>
+                </section>
+                <section className="section">
+                    <a className="button is-medium is-fullwidth">Physique</a>
+                </section>
             </div>
         </div>
     );
