@@ -5,5 +5,8 @@
 # Serve index page from public directory
 GET     /                           controllers.FrontendController.index()
 
+# Login token checker
+GET     /api/login/:token           controllers.LoginController.tokenCheck(token: String)
+
 # Serve static assets under public directory
 GET     /*file                      controllers.FrontendController.assetOrDefault(file)
