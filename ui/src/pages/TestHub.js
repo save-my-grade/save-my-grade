@@ -16,13 +16,7 @@ function TestHub() {
                     <nav className="subtitle is-4">
                         <ul>
                             <li>
-                                <Link to="/login/">Login page</Link>
-                            </li>
-                            <li>
                                 <Link to="/home/">Home page</Link>
-                            </li>
-                            <li>
-                                <Link to="/test/">Test page</Link>
                             </li>
                         </ul>
                     </nav>
