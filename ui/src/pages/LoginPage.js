@@ -1,19 +1,8 @@
 import React from 'react';
-import {useCookies} from "react-cookie";
 import Footer from "../components/Footer";
 import logo_text from "../images/logo_text.png";
 
 function LoginPage() {
-    const [cookies, setCookie, removeCookie] = useCookies(['logged_in']);
-
-    function handleLogin() {
-        setCookie("logged_in", true, {path: "/"});
-    }
-
-    function handleLogout() {
-        removeCookie("logged_in", {path: "/"});
-    }
-
     return (
         <div className="page-container" id="login-page-container">
             <div className="content-wrap">
@@ -29,9 +18,7 @@ function LoginPage() {
                             <div className="box has-text-centered" id="login-box">
                                 <h1 className="title is-spaced">Bienvenue</h1>
                                 <h2 className="subtitle">Veuillez vous connecter à votre compte ISEP</h2>
-                                <button className="button is-link is-large" onClick={handleLogin}>Connexion</button>
-                                <button className="button is-link is-large" onClick={handleLogout}>Déco</button>
-                                {cookies.logged_in && <h1>You're logged in!</h1>}
+                                <button className="button is-link is-large">Connexion</button>
                             </div>
                         </div>
                     </div>
