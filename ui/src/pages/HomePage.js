@@ -54,10 +54,10 @@ function HomePage({handleLogout}) {
                 </div>
                 <div id="navbarMenu" className={classNames("navbar-menu", {"is-active": isActive})}>
                     <div className="navbar-end">
-                        <a href="#" className="navbar-item">
+                        <a href="/home/" className="navbar-item">
                             Ajouter une fiche
                         </a>
-                        <a className="navbar-item link" onClick={() => {
+                        <a href="/home/" className="navbar-item link" onClick={() => {
                             handleLogout()
                         }}>
                             <Avatar name="Mark Zuckerberg" round={true} size={40}/>
