@@ -1,5 +1,6 @@
 package models;
 
+import io.ebean.Finder;
 import io.ebean.Model;
 
 import javax.persistence.Column;
@@ -90,4 +91,6 @@ public class User extends Model {
     public void setIsAdmin(Boolean admin) {
         isAdmin = admin;
     }
+
+    public static final Finder<Integer, User> find = new Finder<>(User.class);
 }

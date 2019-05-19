@@ -18,8 +18,7 @@ public class UserController extends Controller {
             return badRequest(Util.createResponse(
                     "Expecting Json data", false));
         }
-        User user = UserStore.getInstance().addUser(
-                Json.fromJson(json, User.class));
+        User user = Json.fromJson(json, User.class);
         user.save();
         JsonNode jsonObject = Json.toJson(user);
         return created(Util.createResponse(jsonObject, true));

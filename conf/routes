@@ -3,16 +3,15 @@
 # ~~~~
 
 # Serve index page from public directory
-GET         /                        controllers.FrontendController.index()
+GET         /                 controllers.FrontendController.index()
 
 # Users
-GET         /api/users               controllers.UserController.listUsers()
+GET         /api/users        controllers.UserController.listUsers()
 
-+nocsrf
-POST        /api/users               controllers.UserController.create(request: Request)
+POST        /api/users        controllers.UserController.create(request: Request)
 
 # Login token checker
-GET         /api/login/:token        controllers.LoginController.tokenCheck(token: String)
+POST        /api/login        controllers.LoginController.login(request: Request)
 
 # Serve static assets under public directory
-GET         /*file                   controllers.FrontendController.assetOrDefault(file)
+GET         /*file            controllers.FrontendController.assetOrDefault(file)

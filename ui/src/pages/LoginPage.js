@@ -6,6 +6,7 @@ import classNames from "classnames";
 
 function LoginPage({handleLogin}) {
     const [signUpFormVisibility, setSignUpFormVisibility] = useState(false);
+    const [loginFormVisibility, setLoginFormVisibility] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showFailure, setShowFailure] = useState(false);
 
@@ -40,10 +41,17 @@ function LoginPage({handleLogin}) {
                                     ) :
                                     (showFailure ? (
                                         <h2 className="subtitle has-text-danger">L'inscription a échoué...</h2>) : (
-                                        <h2 className="subtitle">Veuillez vous connecter à votre compte ISEP</h2>))}
+                                        <h2 className="subtitle">Souhaitez-vous vous connecter ou vous inscrire
+                                            ?</h2>))}
                                 <button className="button is-link is-large"
-                                        onClick={handleLogin}>Connexion
+                                        onClick={() => setLoginFormVisibility(true)}>Connexion
                                 </button>
+                                {loginFormVisibility && (
+                                    <React.Fragment>
+                                        <br/>
+                                        <LoginForm successCallback={handleLogin}/>
+                                    </React.Fragment>
+                                )}
                                 <br/>
                                 <button className="button is-link is-large is-outlined"
                                         style={{marginTop: 10}}
@@ -58,6 +66,53 @@ function LoginPage({handleLogin}) {
                 </div>
             </div>
         </div>
+    );
+}
+
+function LoginForm(props) {
+    const {successCallback} = props;
+    return (
+        <Formik
+            initialValues={{email: '', password: ''}}
+            validate={values => {
+                let errors = {};
+                if (!values.email) {
+                    errors.email = 'Required';
+                }
+                return errors;
+            }}
+            onSubmit={(values, {setSubmitting}) => {
+                axios({
+                    method: 'post',
+                    url: '/api/login',
+                    data: values
+                })
+                    .then((response) => {
+                        console.log(response);
+                        setSubmitting(false);
+                        successCallback();
+                    })
+                    .catch((response) => {
+                        console.log(response);
+                        setSubmitting(false);
+                    });
+            }}
+        >
+            {({isSubmitting}) => (
+                <Form>
+                    <Field type="email" name="email" className="input" placeholder="Email"/>
+                    <ErrorMessage name="email" component="div"/>
+                    <br/>
+                    <Field type="password" name="password" className="input" placeholder="Mot de passe"/>
+                    <ErrorMessage name="password" component="div"/>
+                    <br/>
+                    <button type="submit" disabled={isSubmitting}
+                            className={classNames("button", {"is-loading": isSubmitting})}>
+                        Se connecter
+                    </button>
+                </Form>
+            )}
+        </Formik>
     );
 }
 
