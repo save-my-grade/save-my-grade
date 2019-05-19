@@ -15,7 +15,7 @@ function App() {
             fetch('/api/login/' + cookies.token).then(response => {
                 return response.json();
             }).then(data => {
-                const {failMessage: failMessage, success: success} = JSON.parse(data);
+                const {failMessage, success} = JSON.parse(data);
                 if (success) {
                     setLoggedIn(true);
                 } else {

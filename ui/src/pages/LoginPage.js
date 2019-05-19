@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import logo_text from "../images/logo_text.png";
 import {ErrorMessage, Field, Form, Formik} from "formik";
+import axios from "axios";
+import classNames from "classnames";
 
 function LoginPage({handleLogin}) {
     const [signUpFormVisibility, setSignUpFormVisibility] = useState(false);
@@ -41,7 +43,7 @@ function LoginPage({handleLogin}) {
 function SignupForm() {
     return (
         <Formik
-            initialValues={{email: '', password: ''}}
+            initialValues={{email: '', password: '', isAdmin: false}}
             validate={values => {
                 let errors = {};
                 if (!values.email) {
@@ -50,19 +52,31 @@ function SignupForm() {
                 return errors;
             }}
             onSubmit={(values, {setSubmitting}) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
+                axios({
+                    method: 'post',
+                    url: '/api/users',
+                    data: values
+                })
+                    .then((response) => {
+                        console.log(response);
+                        setSubmitting(false);
+                    })
+                    .catch((response) => {
+                        console.log(response);
+                        setSubmitting(false);
+                    });
             }}
         >
             {({isSubmitting}) => (
                 <Form>
-                    <Field type="email" name="email"/>
+                    <Field type="email" name="email" className="input" placeholder="Email"/>
                     <ErrorMessage name="email" component="div"/>
-                    <Field type="password" name="password"/>
+                    <br/>
+                    <Field type="password" name="password" className="input" placeholder="Mot de passe"/>
                     <ErrorMessage name="password" component="div"/>
-                    <button type="submit" disabled={isSubmitting}>
+                    <br/>
+                    <button type="submit" disabled={isSubmitting}
+                            className={classNames("button", {"is-loading": isSubmitting})}>
                         S'inscrire
                     </button>
                 </Form>

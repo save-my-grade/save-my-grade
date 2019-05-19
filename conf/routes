@@ -7,6 +7,8 @@ GET         /                        controllers.FrontendController.index()
 
 # Users
 GET         /api/users               controllers.UserController.listUsers()
+
++nocsrf
 POST        /api/users               controllers.UserController.create(request: Request)
 
 # Login token checker
