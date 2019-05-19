@@ -6,11 +6,17 @@ import classNames from "classnames";
 
 function LoginPage({handleLogin}) {
     const [signUpFormVisibility, setSignUpFormVisibility] = useState(false);
-    const [showSuccess, setShowsuccess] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [showFailure, setShowFailure] = useState(false);
 
     function signinSuccess() {
         setSignUpFormVisibility(false);
-        setShowsuccess(true);
+        setShowSuccess(true);
+    }
+
+    function signinFailure() {
+        setShowSuccess(false);
+        setShowFailure(true);
     }
 
     return (
@@ -32,7 +38,9 @@ function LoginPage({handleLogin}) {
                                             vous
                                             connecter</h2>
                                     ) :
-                                    (<h2 className="subtitle">Veuillez vous connecter à votre compte ISEP</h2>)}
+                                    (showFailure ? (
+                                        <h2 className="subtitle has-text-danger">L'inscription a échoué...</h2>) : (
+                                        <h2 className="subtitle">Veuillez vous connecter à votre compte ISEP</h2>))}
                                 <button className="button is-link is-large"
                                         onClick={handleLogin}>Connexion
                                 </button>
@@ -42,7 +50,8 @@ function LoginPage({handleLogin}) {
                                         onClick={() => setSignUpFormVisibility(true)}>
                                     Inscription
                                 </button>
-                                {signUpFormVisibility && <SignupForm successCallback={signinSuccess}/>}
+                                {signUpFormVisibility && <SignupForm successCallback={signinSuccess}
+                                                                     failureCallback={signinFailure}/>}
                             </div>
                         </div>
                     </div>
@@ -53,6 +62,7 @@ function LoginPage({handleLogin}) {
 }
 
 function SignupForm(props) {
+    const {successCallback, failureCallback} = props;
     return (
         <Formik
             initialValues={{email: '', password: '', isAdmin: false}}
@@ -72,11 +82,12 @@ function SignupForm(props) {
                     .then((response) => {
                         console.log(response);
                         setSubmitting(false);
-                        props.successCallback();
+                        successCallback();
                     })
                     .catch((response) => {
                         console.log(response);
                         setSubmitting(false);
+                        failureCallback();
                     });
             }}
         >
