@@ -1,21 +1,30 @@
 package models;
 
-public class User {
-    private Integer id;
-    private String firstName;
-    private String lastName;
-    private String mail;
-    private String password;
-    private String token;
-    private Boolean isAdmin;
+import io.ebean.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class User extends Model {
+
+    @Id
+    Integer id;
+    String firstName;
+    String lastName;
+    String email;
+    String password;
+    String token;
+    Boolean isAdmin;
 
     public User() {
         super();
     }
-    public User(String firstName, String lastName, String mail, String password, Boolean isAdmin) {
+
+    public User(String firstName, String lastName, String email, String password, Boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.mail = mail;
+        this.email = email;
         this.password = password;
         this.isAdmin = isAdmin;
     }
@@ -44,12 +53,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

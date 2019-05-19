@@ -20,6 +20,7 @@ public class UserController extends Controller {
         }
         User user = UserStore.getInstance().addUser(
                 Json.fromJson(json, User.class));
+        user.save();
         JsonNode jsonObject = Json.toJson(user);
         return created(Util.createResponse(jsonObject, true));
     }

@@ -29,7 +29,7 @@ public class UserControllerTest {
             User returnedUser = om.readValue(responseNode.get("body").toString(), User.class);
             assertEquals(user.getFirstName(), returnedUser.getFirstName());
             assertEquals(user.getLastName(), returnedUser.getLastName());
-            assertEquals(user.getMail(), returnedUser.getMail());
+            assertEquals(user.getEmail(), returnedUser.getEmail());
             assertEquals(user.getAdmin(), returnedUser.getAdmin());
             assertEquals(user.getPassword(), returnedUser.getPassword());
 

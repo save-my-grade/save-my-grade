@@ -11,3 +11,5 @@ addSbtPlugin("org.foundweekends.giter8" % "sbt-giter8-scaffold" % "0.11.0")
 //  url("https://dl.bintray.com/heroku/sbt-plugins/"))(Resolver.ivyStylePatterns)
 //
 //addSbtPlugin("com.heroku" % "sbt-heroku" % "1.0.1")
+
+addSbtPlugin("com.typesafe.sbt" % "sbt-play-ebean" % "5.0.0")
