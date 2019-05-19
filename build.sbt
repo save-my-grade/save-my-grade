@@ -18,3 +18,6 @@ libraryDependencies += "org.glassfish.jaxb" % "jaxb-runtime" % "2.3.2"
 
 lazy val myProject = (project in file("."))
   .enablePlugins(PlayJava, PlayEbean)
+
+EclipseKeys.preTasks := Seq(compile in Compile, compile in Test)
+libraryDependencies += javaForms

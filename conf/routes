@@ -24,5 +24,8 @@ GET         /api/courses/:courseId/sheets        controllers.SheetController.get
 GET         /api/courses                         controllers.CourseController.getAllCourses
 POST        /api/courses                         controllers.CourseController.createCourse(request: Request)
 
+POST  /api/upload          controllers.HomeController.upload(request: Request)
+
 # Serve static assets under public directory
 GET         /*file                               controllers.FrontendController.assetOrDefault(file)
+
