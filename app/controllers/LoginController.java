@@ -10,20 +10,34 @@ import play.mvc.Result;
 import static io.ebean.config.TenantMode.DB;
 
 public class LoginController extends Controller {
-    public Result tokenCheck(String token) {
-        boolean tokenValidity = token.equals("1234");
-
-        JsonNode jsonResponse = Json.toJson("{\"success\":" + tokenValidity + ", \"failMessage\":\"Wrong token.\"}");
-        return ok(jsonResponse).as("application/json");
-    }
-
-    public Result login(Http.Request request) {
-        JsonNode json = request.body().asJson();
-        if (json == null) {
+    public Result tokenCheck(Http.Request request) {
+        System.out.println(request.body().asJson());
+        User requestedUser;
+        try {
+            requestedUser = requestToUser(request);
+        } catch (Exception e) {
             return badRequest(Util.createResponse(
                     "Expecting Json data", false));
         }
-        User requestedUser = Json.fromJson(json, User.class);
+        System.out.println(requestedUser);
+        User realUser = User.find.byId(requestedUser.getId());
+        if (realUser == null || !requestedUser.getToken().equals(realUser.getToken())) {
+            return unauthorized(Util.createResponse(
+                    "Bad token", false
+            ));
+        }
+        JsonNode jsonObject = Json.toJson(realUser);
+        return ok(Util.createResponse(jsonObject, true));
+    }
+
+    public Result login(Http.Request request) {
+        User requestedUser;
+        try {
+            requestedUser = requestToUser(request);
+        } catch (Exception e) {
+            return badRequest(Util.createResponse(
+                    "Expecting Json data", false));
+        }
         User realUser = User.find.query().where().eq("email", requestedUser.getEmail()).findOne();
         if (realUser == null || !requestedUser.getPassword().equals(realUser.getPassword())) {
             return unauthorized(Util.createResponse(
@@ -31,7 +45,21 @@ public class LoginController extends Controller {
             ));
 
         }
+        realUser.setToken(generateToken());
+        realUser.save();
         JsonNode jsonObject = Json.toJson(realUser);
         return ok(Util.createResponse(jsonObject, true));
+    }
+
+    private String generateToken() {
+        return String.valueOf(Math.random());
+    }
+
+    private User requestToUser(Http.Request request) throws Exception {
+        JsonNode json = request.body().asJson();
+        if (json == null) {
+            throw new Exception();
+        }
+        return Json.fromJson(json, User.class);
     }
 }

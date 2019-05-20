@@ -1,8 +1,12 @@
+import PropTypes from 'prop-types'
 import React, {useState} from 'react';
 import logo_text from "../images/logo_text.png";
-import {ErrorMessage, Field, Form, Formik} from "formik";
-import axios from "axios";
-import classNames from "classnames";
+import SignupForm from "../components/forms/SignupForm";
+import LoginForm from "../components/forms/LoginForm";
+
+LoginPage.propTypes = {
+    handleLogin: PropTypes.func.isRequired
+};
 
 function LoginPage({handleLogin}) {
     const [signUpFormVisibility, setSignUpFormVisibility] = useState(false);
@@ -18,6 +22,14 @@ function LoginPage({handleLogin}) {
     function signinFailure() {
         setShowSuccess(false);
         setShowFailure(true);
+    }
+
+    function loginSuccess(user) {
+        handleLogin(user);
+    }
+
+    function loginFailure() {
+        alert("La connexion a échoué.");
     }
 
     return (
@@ -40,7 +52,7 @@ function LoginPage({handleLogin}) {
                                             connecter</h2>
                                     ) :
                                     (showFailure ? (
-                                        <h2 className="subtitle has-text-danger">L'inscription a échoué...</h2>) : (
+                                        <h2 className="subtitle has-text-danger">{"L'inscription a échoué..."}</h2>) : (
                                         <h2 className="subtitle">Souhaitez-vous vous connecter ou vous inscrire
                                             ?</h2>))}
                                 <button className="button is-link is-large"
@@ -49,7 +61,7 @@ function LoginPage({handleLogin}) {
                                 {loginFormVisibility && (
                                     <React.Fragment>
                                         <br/>
-                                        <LoginForm successCallback={handleLogin}/>
+                                        <LoginForm successCallback={loginSuccess} failureCallback={loginFailure}/>
                                     </React.Fragment>
                                 )}
                                 <br/>
@@ -67,102 +79,6 @@ function LoginPage({handleLogin}) {
             </div>
         </div>
     );
-}
-
-function LoginForm(props) {
-    const {successCallback} = props;
-    return (
-        <Formik
-            initialValues={{email: '', password: ''}}
-            validate={values => {
-                let errors = {};
-                if (!values.email) {
-                    errors.email = 'Required';
-                }
-                return errors;
-            }}
-            onSubmit={(values, {setSubmitting}) => {
-                axios({
-                    method: 'post',
-                    url: '/api/login',
-                    data: values
-                })
-                    .then((response) => {
-                        console.log(response);
-                        setSubmitting(false);
-                        successCallback();
-                    })
-                    .catch((response) => {
-                        console.log(response);
-                        setSubmitting(false);
-                    });
-            }}
-        >
-            {({isSubmitting}) => (
-                <Form>
-                    <Field type="email" name="email" className="input" placeholder="Email"/>
-                    <ErrorMessage name="email" component="div"/>
-                    <br/>
-                    <Field type="password" name="password" className="input" placeholder="Mot de passe"/>
-                    <ErrorMessage name="password" component="div"/>
-                    <br/>
-                    <button type="submit" disabled={isSubmitting}
-                            className={classNames("button", {"is-loading": isSubmitting})}>
-                        Se connecter
-                    </button>
-                </Form>
-            )}
-        </Formik>
-    );
-}
-
-function SignupForm(props) {
-    const {successCallback, failureCallback} = props;
-    return (
-        <Formik
-            initialValues={{email: '', password: '', isAdmin: false}}
-            validate={values => {
-                let errors = {};
-                if (!values.email) {
-                    errors.email = 'Required';
-                }
-                return errors;
-            }}
-            onSubmit={(values, {setSubmitting}) => {
-                axios({
-                    method: 'post',
-                    url: '/api/users',
-                    data: values
-                })
-                    .then((response) => {
-                        console.log(response);
-                        setSubmitting(false);
-                        successCallback();
-                    })
-                    .catch((response) => {
-                        console.log(response);
-                        setSubmitting(false);
-                        failureCallback();
-                    });
-            }}
-        >
-            {({isSubmitting}) => (
-                <Form>
-                    <Field type="email" name="email" className="input" placeholder="Email"/>
-                    <ErrorMessage name="email" component="div"/>
-                    <br/>
-                    <Field type="password" name="password" className="input" placeholder="Mot de passe"/>
-                    <ErrorMessage name="password" component="div"/>
-                    <br/>
-                    <button type="submit" disabled={isSubmitting}
-                            className={classNames("button", {"is-loading": isSubmitting})}>
-                        S'inscrire
-                    </button>
-                </Form>
-            )}
-        </Formik>
-    );
-
 }
 
 export default LoginPage;

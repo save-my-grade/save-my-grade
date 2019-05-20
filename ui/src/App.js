@@ -5,36 +5,37 @@ import TestHub from "./pages/TestHub";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import {useCookies} from "react-cookie";
+import axios from "axios";
 
 function App() {
-    const [cookies, setCookie, removeCookie] = useCookies(['token']);
+    const [cookies, setCookie, removeCookie] = useCookies(['token', 'id']);
     const [isLoggedIn, setLoggedIn] = useState(false);
 
     useEffect(() => {
-        if (cookies.token) {
-            fetch('/api/login/' + cookies.token).then(response => {
-                return response.json();
-            }).then(data => {
-                const {failMessage, success} = JSON.parse(data);
-                if (success) {
+        if (cookies.token && cookies.id) {
+            axios({
+                method: 'post',
+                url: '/api/login/token',
+                data: {"id": cookies.id, "token": cookies.token}
+            })
+                .then(() => {
                     setLoggedIn(true);
-                } else {
-                    alert(failMessage);
-                }
-            }).catch(e => {
+                }).catch((e) => {
                 alert(e);
             })
         }
     });
 
-    function handleLogin() {
+    function handleLogin(user) {
+        setCookie('token', user.token, {path: '/'});
+        setCookie('id', user.id, {path: '/'});
         setLoggedIn(true);
-        setCookie('token', '1234', {path: '/'});
     }
 
     function handleLogout() {
         alert("Signing out...");
         removeCookie('token', {path: '/'});
+        removeCookie('id', {path: '/'});
         setLoggedIn(false);
         window.location.href = "/";
     }
