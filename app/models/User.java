@@ -84,8 +84,8 @@ public class User extends Model {
         return isAdmin;
     }
 
-    public void setIsAdmin(Boolean admin) {
-        isAdmin = admin;
+    public void setIsAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public static final Finder<Integer, User> find = new Finder<>(User.class);
