@@ -6,7 +6,7 @@ import CourseLink from "../components/CourseLink";
 import Avatar from 'react-avatar';
 
 
-function HomePage() {
+function HomePage({handleLogout}) {
     const [isActive, setActive] = useState(false);
 
     function toggleMenu() {
@@ -54,10 +54,12 @@ function HomePage() {
                 </div>
                 <div id="navbarMenu" className={classNames("navbar-menu", {"is-active": isActive})}>
                     <div className="navbar-end">
-                        <a href="#" className="navbar-item">
+                        <a href="/home/" className="navbar-item">
                             Ajouter une fiche
                         </a>
-                        <a href="#" className="navbar-item">
+                        <a href="/home/" className="navbar-item link" onClick={() => {
+                            handleLogout()
+                        }}>
                             <Avatar name="Mark Zuckerberg" round={true} size={40}/>
                         </a>
                     </div>
