@@ -11,7 +11,6 @@ import static io.ebean.config.TenantMode.DB;
 
 public class LoginController extends Controller {
     public Result tokenCheck(Http.Request request) {
-        System.out.println(request.body().asJson());
         User requestedUser;
         try {
             requestedUser = requestToUser(request);
@@ -19,7 +18,6 @@ public class LoginController extends Controller {
             return badRequest(Util.createResponse(
                     "Expecting Json data", false));
         }
-        System.out.println(requestedUser);
         User realUser = User.find.byId(requestedUser.getId());
         if (realUser == null || !requestedUser.getToken().equals(realUser.getToken())) {
             return unauthorized(Util.createResponse(

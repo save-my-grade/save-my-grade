@@ -80,10 +80,6 @@ public class User extends Model {
         this.token = token;
     }
 
-    public boolean checkToken(String token) {
-        return this.token.equals(token);
-    }
-
     public Boolean getIsAdmin() {
         return isAdmin;
     }
