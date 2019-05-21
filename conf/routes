@@ -10,8 +10,6 @@ POST        /api/login        controllers.LoginController.login(request: Request
 POST        /api/login/token  controllers.LoginController.tokenCheck(request: Request)
 
 # Users
-GET         /api/users        controllers.UserController.listUsers()
-
 POST        /api/users        controllers.UserController.create(request: Request)
 
 # Serve static assets under public directory
