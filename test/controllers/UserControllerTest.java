@@ -30,7 +30,7 @@ public class UserControllerTest {
             assertEquals(user.getFirstName(), returnedUser.getFirstName());
             assertEquals(user.getLastName(), returnedUser.getLastName());
             assertEquals(user.getEmail(), returnedUser.getEmail());
-            assertEquals(user.getAdmin(), returnedUser.getAdmin());
+            assertEquals(user.getIsAdmin(), returnedUser.getIsAdmin());
             assertEquals(user.getPassword(), returnedUser.getPassword());
 
         } catch (IOException e) {
