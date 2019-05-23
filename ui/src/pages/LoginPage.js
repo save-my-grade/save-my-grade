@@ -68,7 +68,6 @@ function LoginPage({handleLogin}) {
                                         <h2 className="subtitle has-text-danger">{"L'inscription a échoué..."}</h2>) : (
                                         <h2 className="subtitle">Souhaitez-vous vous connecter ou vous inscrire
                                             ?</h2>))}
-                                <br/>
                                 {loginFormVisibility &&
                                 <LoginForm successCallback={loginSuccess} failureCallback={loginFailure}/>}
                                 {signUpFormVisibility && <SignupForm successCallback={signUpSuccess}
