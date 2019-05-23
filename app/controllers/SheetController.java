@@ -32,14 +32,5 @@ public class SheetController extends Controller {
         JsonNode jsonObject = Json.toJson(sheet);
         return created(Util.createResponse(jsonObject, true));
     }
-
-    public Result test() {
-        //Sheet sheet = new Sheet(123,456, "Fiche test", "Chapitres, sujets...", "/path/vefdsqfdrs/fichier");
-        //sheet.save();
-        Course course = new Course("qfkjslnfdjsklqn", "CII");
-        course.save();
-        return ok();
-    }
-
 }
  
