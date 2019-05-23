@@ -10,18 +10,31 @@ LoginPage.propTypes = {
 
 function LoginPage({handleLogin}) {
     const [signUpFormVisibility, setSignUpFormVisibility] = useState(false);
-    const [loginFormVisibility, setLoginFormVisibility] = useState(false);
-    const [showSuccess, setShowSuccess] = useState(false);
-    const [showFailure, setShowFailure] = useState(false);
+    const [loginFormVisibility, setLoginFormVisibility] = useState(true);
 
-    function signinSuccess() {
+    const toggleForm = () => {
+        if (loginFormVisibility) {
+            setLoginFormVisibility(false);
+            setSignUpFormVisibility(true);
+        } else {
+            setSignUpFormVisibility(false);
+            setLoginFormVisibility(true);
+        }
+    };
+
+    const [showSignUpSuccess, setShowSignUpSuccess] = useState(false);
+
+    function signUpSuccess() {
         setSignUpFormVisibility(false);
-        setShowSuccess(true);
+        setShowSignUpSuccess(true);
+        setLoginFormVisibility(true);
     }
 
-    function signinFailure() {
-        setShowSuccess(false);
-        setShowFailure(true);
+    const [showSignUpFailure, setShowSignUpFailure] = useState(false);
+
+    function signUpFailure() {
+        setShowSignUpSuccess(false);
+        setShowSignUpFailure(true);
     }
 
     function loginSuccess(user) {
@@ -46,32 +59,24 @@ function LoginPage({handleLogin}) {
                         <div className="column is-half">
                             <div className="box has-text-centered" id="login-box">
                                 <h1 className="title is-spaced">Bienvenue</h1>
-                                {showSuccess ? (
+                                {showSignUpSuccess ? (
                                         <h2 className="subtitle has-text-success">Inscription réussie ! Veuillez maintenant
                                             vous
                                             connecter</h2>
                                     ) :
-                                    (showFailure ? (
+                                    (showSignUpFailure ? (
                                         <h2 className="subtitle has-text-danger">{"L'inscription a échoué..."}</h2>) : (
                                         <h2 className="subtitle">Souhaitez-vous vous connecter ou vous inscrire
                                             ?</h2>))}
-                                <button className="button is-link is-large"
-                                        onClick={() => setLoginFormVisibility(true)}>Connexion
-                                </button>
-                                {loginFormVisibility && (
-                                    <React.Fragment>
-                                        <br/>
-                                        <LoginForm successCallback={loginSuccess} failureCallback={loginFailure}/>
-                                    </React.Fragment>
-                                )}
-                                <br/>
-                                <button className="button is-link is-large is-outlined"
+                                {loginFormVisibility &&
+                                <LoginForm successCallback={loginSuccess} failureCallback={loginFailure}/>}
+                                {signUpFormVisibility && <SignupForm successCallback={signUpSuccess}
+                                                                     failureCallback={signUpFailure}/>}
+                                <button className="button is-text has-text-info"
                                         style={{marginTop: 10}}
-                                        onClick={() => setSignUpFormVisibility(true)}>
-                                    Inscription
+                                        onClick={toggleForm}>
+                                    {loginFormVisibility ? "S'inscrire" : "Se connecter"}
                                 </button>
-                                {signUpFormVisibility && <SignupForm successCallback={signinSuccess}
-                                                                     failureCallback={signinFailure}/>}
                             </div>
                         </div>
                     </div>

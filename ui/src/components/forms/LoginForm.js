@@ -17,7 +17,10 @@ function LoginForm(props) {
             validate={values => {
                 let errors = {};
                 if (!values.email) {
-                    errors.email = 'Required';
+                    errors.email = "L'email ne peut pas être vide";
+                }
+                if (!values.password) {
+                    errors.password = "Le mot de passe ne peut pas être vide";
                 }
                 return errors;
             }}
@@ -41,12 +44,12 @@ function LoginForm(props) {
                 <Form>
                     <Field type="email" name="email" className="input" placeholder="Email"/>
                     <ErrorMessage name="email" component="div"/>
-                    <br/>
+                    <div style={{marginTop: 10}}/>
                     <Field type="password" name="password" className="input" placeholder="Mot de passe"/>
                     <ErrorMessage name="password" component="div"/>
-                    <br/>
+                    <div style={{marginTop: 10}}/>
                     <button type="submit" disabled={isSubmitting}
-                            className={classNames("button", {"is-loading": isSubmitting})}>
+                            className={classNames("button", "is-info", {"is-loading": isSubmitting})}>
                         Se connecter
                     </button>
                 </Form>
