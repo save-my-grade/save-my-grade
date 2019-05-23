@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Course extends Model{
+public class Course extends Model {
 
     @Id
     Integer id;
@@ -16,8 +16,11 @@ public class Course extends Model{
     String name;
     String cycle;
 
-    public Course(Integer id, String name, String cycle) {
-        this.id = id;
+    public Course() {
+        super();
+    }
+
+    public Course(String name, String cycle) {
         this.name = name;
         this.cycle = cycle;
     }

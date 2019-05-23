@@ -1,6 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import models.Course;
 import models.Sheet;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -9,19 +10,20 @@ import play.mvc.Result;
 
 public class SheetController extends Controller {
     public Result getSheet(Integer id) {
-        
+
         Sheet sheet = Sheet.find.byId(id);
         JsonNode jsonObject = Json.toJson(sheet);
-        if (sheet == null){
+        if (sheet == null) {
             return ok(Util.createResponse(jsonObject, false));
-        }else{
+        } else {
             return ok(Util.createResponse(jsonObject, true));
         }
     }
-    public Result createSheet(Http.Request request){
+
+    public Result createSheet(Http.Request request) {
         Sheet sheet;
         try {
-            sheet = Json.fromJson(getRequest(request), Sheet.class);
+            sheet = Json.fromJson(Util.requestBodyToJson(request), Sheet.class);
         } catch (Exception e) {
             return badRequest(Util.createResponse(
                     "Expecting Json data", false));
@@ -31,13 +33,13 @@ public class SheetController extends Controller {
         return created(Util.createResponse(jsonObject, true));
     }
 
-    private JsonNode getRequest(Http.Request request) throws Exception {
-        JsonNode json = request.body().asJson();
-        if (json == null) {
-            throw new Exception();
-        }
-        return json;
+    public Result test() {
+        //Sheet sheet = new Sheet(123,456, "Fiche test", "Chapitres, sujets...", "/path/vefdsqfdrs/fichier");
+        //sheet.save();
+        Course course = new Course("qfkjslnfdjsklqn", "CII");
+        course.save();
+        return ok();
     }
-    
+
 }
  

@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Sheet extends Model{
+public class Sheet extends Model {
 
     @Id
     Integer id;
@@ -19,15 +19,17 @@ public class Sheet extends Model{
     @Column(unique = true)
     String file_path;
 
-    public Sheet(Integer id, Integer author_id, Integer course_id, String name, String tags, String file_path) {
-        this.id = id;
+    public Sheet() {
+        super();
+    }
+
+    public Sheet(Integer author_id, Integer course_id, String name, String tags, String file_path) {
         this.author_id = author_id;
         this.course_id = course_id;
         this.name = name;
         this.tags = tags;
         this.file_path = file_path;
     }
-
 
 
     public Integer getId() {
