@@ -5,10 +5,11 @@ import classNames from "classnames";
 import Avatar from 'react-avatar';
 
 NavBar.propTypes = {
-    handleLogout: PropTypes.func.isRequired
+    handleLogout: PropTypes.func.isRequired,
+    connectedUser: PropTypes.object.isRequired
 };
 
-function NavBar({handleLogout}) {
+function NavBar({handleLogout, connectedUser}) {
     const [isActive, setActive] = useState(false);
 
     function toggleMenu() {
@@ -39,7 +40,7 @@ function NavBar({handleLogout}) {
                     <a href="/home/" className="navbar-item link" onClick={() => {
                         handleLogout()
                     }}>
-                        <Avatar name="Mark Zuckerberg" round={true} size={40}/>
+                        <Avatar name={connectedUser.firstName} round={true} size={40}/>
                     </a>
                 </div>
             </div>

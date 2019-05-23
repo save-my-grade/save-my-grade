@@ -13,7 +13,7 @@ function SignupForm(props) {
     const {successCallback, failureCallback} = props;
     return (
         <Formik
-            initialValues={{email: '', password: '', isAdmin: false}}
+            initialValues={{email: '', password: '', firstName: '', isAdmin: false}}
             validate={values => {
                 let errors = {};
                 if (!values.email) {
@@ -39,6 +39,9 @@ function SignupForm(props) {
         >
             {({isSubmitting}) => (
                 <Form>
+                    <Field type="text" name="firstName" className="input" placeholder="Prénom"/>
+                    <ErrorMessage name="firstName" component="div"/>
+                    <br/>
                     <Field type="email" name="email" className="input" placeholder="Email"/>
                     <ErrorMessage name="email" component="div"/>
                     <br/>

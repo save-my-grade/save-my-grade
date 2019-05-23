@@ -36,7 +36,7 @@ function HomePage({handleLogout, connectedUser}) {
 
     return (
         <div>
-            <NavBar handleLogout={handleLogout}/>
+            <NavBar handleLogout={handleLogout} connectedUser={connectedUser}/>
             <div className="page-content">
                 <section className="section">
                     <h1 className="title">Matières</h1>
