@@ -12,8 +12,7 @@ function ProfilePage({handleLogout, connectedUser}) {
         <React.Fragment>
             <NavBar connectedUser={connectedUser}/>
             <section className="section">
-                <h1 className="title">Profile</h1>
-                <h2 className="subtitle">Utilisateur connecté :</h2>
+                <h1 className="title">Mon profil</h1>
                 <h3>{connectedUser.firstName}</h3>
                 <h3>{connectedUser.email}</h3>
             </section>

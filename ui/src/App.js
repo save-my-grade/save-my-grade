@@ -37,7 +37,7 @@ function App() {
     }
 
     function handleLogout() {
-        alert("Signing out...");
+        alert("Déconnexion...");
         removeCookie('token', {path: '/'});
         removeCookie('id', {path: '/'});
         setLoggedIn(false);
