@@ -1,28 +1,35 @@
 import PropTypes from 'prop-types'
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from "../images/logo_text.png"
 import classNames from "classnames";
 import Avatar from 'react-avatar';
+import {NavLink} from "react-router-dom";
 
 NavBar.propTypes = {
-    handleLogout: PropTypes.func.isRequired,
     connectedUser: PropTypes.object.isRequired
 };
 
-function NavBar({handleLogout, connectedUser}) {
+function NavBar({connectedUser}) {
     const [isActive, setActive] = useState(false);
 
     function toggleMenu() {
         isActive ? setActive(false) : setActive(true);
     }
 
+    useEffect(() => {
+        document.body.classList.add('has-navbar-fixed-top');
+        return function cleanup() {
+            document.body.classList.remove('has-navbar-fixed-top');
+        }
+    });
+
     return (
         <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation"
              style={{backgroundColor: "#fafafa"}}>
             <div className="navbar-brand">
-                <a className="navbar-item" href="/home/" style={{paddingLeft: "5%"}}>
+                <NavLink className="navbar-item" to="/home" style={{paddingLeft: "5%"}}>
                     <img src={logo} alt="logo"/>
-                </a>
+                </NavLink>
 
                 <span role="button" className={classNames("navbar-burger burger", {"is-active": isActive})}
                       aria-label="menu" aria-expanded="false"
@@ -34,14 +41,12 @@ function NavBar({handleLogout, connectedUser}) {
             </div>
             <div id="navbarMenu" className={classNames("navbar-menu", {"is-active": isActive})}>
                 <div className="navbar-end">
-                    <a href="/home/" className="navbar-item">
+                    <a href="/home" className="navbar-item">
                         Ajouter une fiche
                     </a>
-                    <a href="/home/" className="navbar-item link" onClick={() => {
-                        handleLogout()
-                    }}>
+                    <NavLink to="/profile" className="navbar-item link">
                         <Avatar name={connectedUser.firstName} round={true} size={40}/>
-                    </a>
+                    </NavLink>
                 </div>
             </div>
         </nav>

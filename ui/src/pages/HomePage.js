@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import classNames from "classnames";
 import PropTypes from 'prop-types';
 import CourseLink from "../components/CourseLink";
@@ -6,20 +6,12 @@ import NavBar from "../components/NavBar";
 
 
 HomePage.propTypes = {
-    connectedUser: PropTypes.object.isRequired,
-    handleLogout: PropTypes.func.isRequired
+    connectedUser: PropTypes.object.isRequired
 };
 
-function HomePage({handleLogout, connectedUser}) {
+function HomePage({connectedUser}) {
 
     const [selectedCycle, setSelectedCycle] = useState("prep");
-
-    useEffect(() => {
-        document.body.classList.add('has-navbar-fixed-top');
-        return function cleanup() {
-            document.body.classList.remove('has-navbar-fixed-top');
-        }
-    });
 
     function CycleButton(props) {
         const {code, text} = props;
@@ -36,7 +28,7 @@ function HomePage({handleLogout, connectedUser}) {
 
     return (
         <div>
-            <NavBar handleLogout={handleLogout} connectedUser={connectedUser}/>
+            <NavBar connectedUser={connectedUser}/>
             <div className="page-content">
                 <section className="section">
                     <h1 className="title">Matières</h1>

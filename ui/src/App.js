@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import {useCookies} from "react-cookie";
 import axios from "axios";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
     const [cookies, setCookie, removeCookie] = useCookies(['token', 'id']);
@@ -12,13 +13,15 @@ function App() {
     const [connectedUser, setConnectedUser] = useState({});
 
     useEffect(() => {
-        if (cookies.token && cookies.id) {
+        if (!isLoggedIn && cookies.token && cookies.id) {
             axios({
                 method: 'post',
                 url: '/api/login/token',
                 data: {"id": cookies.id, "token": cookies.token}
             })
-                .then(() => {
+                .then((response) => {
+                    let user = response.data.body;
+                    setConnectedUser(user);
                     setLoggedIn(true);
                 }).catch((e) => {
                 alert(e);
@@ -44,9 +47,11 @@ function App() {
     return (
         <Router>
             <Switch>
-                <Route path="/login/" render={() => isLoggedIn ? <Redirect to={{pathname: "/"}}/> :
+                <Route path="/login" render={() => isLoggedIn ? <Redirect to={{pathname: "/"}}/> :
                     <LoginPage handleLogin={handleLogin}/>}/>
-                <PrivateRoute path="/home/" component={HomePage} isLoggedIn={isLoggedIn}
+                <PrivateRoute path="/home" component={HomePage} isLoggedIn={isLoggedIn}
+                              componentProps={{connectedUser}}/>
+                <PrivateRoute path="/profile" component={ProfilePage} isLoggedIn={isLoggedIn}
                               componentProps={{handleLogout, connectedUser}}/>
                 <Route render={() => <Redirect to={{pathname: "/home"}}/>}/>
             </Switch>
