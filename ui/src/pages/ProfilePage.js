@@ -14,6 +14,7 @@ function ProfilePage({handleLogout, connectedUser}) {
             <section className="section">
                 <h1 className="title">Mon profil</h1>
                 <h3>{connectedUser.firstName}</h3>
+                {connectedUser.lastName && <h3>{connectedUser.lastName}</h3>}
                 <h3>{connectedUser.email}</h3>
             </section>
             <section className="section">

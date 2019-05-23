@@ -13,11 +13,17 @@ function SignupForm(props) {
     const {successCallback, failureCallback} = props;
     return (
         <Formik
-            initialValues={{email: '', password: '', firstName: '', isAdmin: false}}
+            initialValues={{firstName: '', lastName: '', email: '', password: '', confirmPassword: '', isAdmin: false}}
             validate={values => {
                 let errors = {};
+                if (!values.firstName) {
+                    errors.firstName = "Le prénom ne peut pas être vide";
+                }
                 if (!values.email) {
-                    errors.email = 'Required';
+                    errors.email = "L'email ne peut pas être vide";
+                }
+                if (!values.password) {
+                    errors.password = "Le mot de passe ne peut pas être vide";
                 }
                 return errors;
             }}
@@ -39,17 +45,20 @@ function SignupForm(props) {
         >
             {({isSubmitting}) => (
                 <Form>
-                    <Field type="text" name="firstName" className="input" placeholder="Prénom"/>
+                    <Field type="text" name="firstName" className="input" placeholder="Prénom (obligatoire)"/>
                     <ErrorMessage name="firstName" component="div"/>
-                    <br/>
-                    <Field type="email" name="email" className="input" placeholder="Email"/>
+                    <div style={{marginTop: 10}}/>
+                    <Field type="text" name="lastName" className="input" placeholder="Nom"/>
+                    <ErrorMessage name="lastName" component="div"/>
+                    <div style={{marginTop: 10}}/>
+                    <Field type="email" name="email" className="input" placeholder="Email (obligatoire)"/>
                     <ErrorMessage name="email" component="div"/>
-                    <br/>
-                    <Field type="password" name="password" className="input" placeholder="Mot de passe"/>
+                    <div style={{marginTop: 10}}/>
+                    <Field type="password" name="password" className="input" placeholder="Mot de passe (obligatoire)"/>
                     <ErrorMessage name="password" component="div"/>
-                    <br/>
+                    <div style={{marginTop: 10}}/>
                     <button type="submit" disabled={isSubmitting}
-                            className={classNames("button", {"is-loading": isSubmitting})}>
+                            className={classNames("button", "is-info", {"is-loading": isSubmitting})}>
                         {"S'inscrire"}
                     </button>
                 </Form>
