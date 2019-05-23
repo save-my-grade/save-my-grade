@@ -1,13 +1,18 @@
 package models;
 
 public enum Cycle {
-    PREP("pre"), CII("cii"), ING("ing");
+    //@EnumValue("pre")
+    PREP("pre"),
+    //@EnumValue("cii")
+    CII("cii"),
+    //@EnumValue("ing")
+    ING("ing");
+    
+    private String code;
 
     Cycle(String s) {
         code = s;
     }
-
-    private String code;
 
     public String getCode() {
         return code;

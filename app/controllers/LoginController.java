@@ -7,13 +7,11 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 
-import static io.ebean.config.TenantMode.DB;
-
 public class LoginController extends Controller {
     public Result tokenCheck(Http.Request request) {
         User requestedUser;
         try {
-            requestedUser = requestToUser(request);
+            requestedUser = Json.fromJson(Util.requestBodyToJson(request), User.class);
         } catch (Exception e) {
             return badRequest(Util.createResponse(
                     "Expecting Json data", false));
@@ -31,7 +29,7 @@ public class LoginController extends Controller {
     public Result login(Http.Request request) {
         User requestedUser;
         try {
-            requestedUser = requestToUser(request);
+            requestedUser = Json.fromJson(Util.requestBodyToJson(request), User.class);
         } catch (Exception e) {
             return badRequest(Util.createResponse(
                     "Expecting Json data", false));
@@ -51,13 +49,5 @@ public class LoginController extends Controller {
 
     private String generateToken() {
         return String.valueOf(Math.random());
-    }
-
-    private User requestToUser(Http.Request request) throws Exception {
-        JsonNode json = request.body().asJson();
-        if (json == null) {
-            throw new Exception();
-        }
-        return Json.fromJson(json, User.class);
     }
 }
