@@ -3,14 +3,23 @@
 # ~~~~
 
 # Serve index page from public directory
-GET         /                 controllers.FrontendController.index()
+GET         /                       controllers.FrontendController.index()
 
 # Login
-POST        /api/login        controllers.LoginController.login(request: Request)
-POST        /api/login/token  controllers.LoginController.tokenCheck(request: Request)
+POST        /api/login              controllers.LoginController.login(request: Request)
+POST        /api/login/token        controllers.LoginController.tokenCheck(request: Request)
 
 # Users
-POST        /api/users        controllers.UserController.create(request: Request)
+POST        /api/users              controllers.UserController.create(request: Request)
+
+# Sheet
+GET         /api/sheet/get/:sheetId     controllers.SheetController.getSheet(sheetId:Integer)
+POST        /api/sheet/create      controllers.SheetController.createSheet(request: Request)
+
+# Course
+GET         /api/course/get/:courseId     controllers.CourseController.getCourse(courseId:Integer)
+GET         /api/course/get         controllers.CourseController.getAllCourse()
+POST        /api/course/create      controllers.CourseController.createCourse(request: Request)
 
 # Serve static assets under public directory
-GET         /*file            controllers.FrontendController.assetOrDefault(file)
+GET         /*file                  controllers.FrontendController.assetOrDefault(file)

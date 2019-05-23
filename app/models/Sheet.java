@@ -1,5 +1,6 @@
 package models;
 
+import io.ebean.Finder;
 import io.ebean.Model;
 
 import javax.persistence.Column;
@@ -11,19 +12,20 @@ public class Sheet extends Model{
 
     @Id
     Integer id;
-    Integer authorId;
-    Integer courseId;
+    Integer author_id;
+    Integer course_id;
     String name;
     String tags;
     @Column(unique = true)
-    String filePath;
+    String file_path;
 
-    public Sheet(Integer id, Integer authorId, String name, String tags, String filePath) {
+    public Sheet(Integer id, Integer author_id, Integer course_id, String name, String tags, String file_path) {
         this.id = id;
-        this.authorId = authorId;
+        this.author_id = author_id;
+        this.course_id = course_id;
         this.name = name;
         this.tags = tags;
-        this.filePath = filePath;
+        this.file_path = file_path;
     }
 
 
@@ -37,19 +39,19 @@ public class Sheet extends Model{
     }
 
     public Integer getAuthorId() {
-        return this.authorId;
+        return this.author_id;
     }
 
-    public void setAuthorId(Integer authorId) {
-        this.authorId = authorId;
+    public void setAuthorId(Integer author_id) {
+        this.author_id = author_id;
     }
 
     public Integer getCourseId() {
-        return this.courseId;
+        return this.course_id;
     }
 
-    public void setCourseId(Integer courseId) {
-        this.courseId = courseId;
+    public void setCourseId(Integer course_id) {
+        this.course_id = course_id;
     }
 
     public String getName() {
@@ -69,10 +71,12 @@ public class Sheet extends Model{
     }
 
     public String getFilePath() {
-        return this.filePath;
+        return this.file_path;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setFilePath(String file_path) {
+        this.file_path = file_path;
     }
+
+    public static final Finder<Integer, Sheet> find = new Finder<>(Sheet.class);
 }

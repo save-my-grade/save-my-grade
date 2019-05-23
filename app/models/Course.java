@@ -1,5 +1,6 @@
 package models;
 
+import io.ebean.Finder;
 import io.ebean.Model;
 
 import javax.persistence.Column;
@@ -13,9 +14,9 @@ public class Course extends Model{
     Integer id;
     @Column(unique = true)
     String name;
-    Cycle cycle;
+    String cycle;
 
-    public Course(Integer id, String name, Cycle cycle) {
+    public Course(Integer id, String name, String cycle) {
         this.id = id;
         this.name = name;
         this.cycle = cycle;
@@ -38,14 +39,14 @@ public class Course extends Model{
         this.name = name;
     }
 
-    public Cycle getCycle() {
+    public String getCycle() {
         return this.cycle;
     }
 
-    public void setCycle(Cycle cycle) {
+    public void setCycle(String cycle) {
         this.cycle = cycle;
     }
 
-
+    public static final Finder<Integer, Course> find = new Finder<>(Course.class);
 }
 
