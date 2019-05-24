@@ -20,9 +20,10 @@ function CreateSheetModal({isActive, toggle, connectedUser}) {
                 </header>
                 <section className="modal-card-body">
                     <CreateSheetForm connectedUser={connectedUser} successCallback={() => {
-                        alert("Good")
+                        alert("Fiche créée avec succès !");
+                        toggle();
                     }} failureCallback={() => {
-                        alert("Not good")
+                        alert("Une erreur s'est produite lors de la création de la fiche.")
                     }}/>
                 </section>
             </div>

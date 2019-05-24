@@ -60,7 +60,7 @@ function CreateSheetForm({connectedUser, successCallback, failureCallback}) {
                 }
                 return errors;
             }}
-            onSubmit={(values, {setSubmitting}) => {
+            onSubmit={(values, {setSubmitting, resetForm}) => {
                 axios({
                     method: 'post',
                     url: '/api/sheets',
@@ -69,6 +69,7 @@ function CreateSheetForm({connectedUser, successCallback, failureCallback}) {
                     .then(() => {
                         setSubmitting(false);
                         successCallback();
+                        resetForm();
                     })
                     .catch(() => {
                         setSubmitting(false);
