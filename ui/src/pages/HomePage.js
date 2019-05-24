@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import classNames from "classnames";
 import PropTypes from 'prop-types';
 import CourseLink from "../components/CourseLink";
 import NavBar from "../components/NavBar";
+import axios from "axios";
 
 
 HomePage.propTypes = {
@@ -13,6 +14,28 @@ function HomePage({connectedUser}) {
 
     const [selectedCycle, setSelectedCycle] = useState("prep");
 
+    const [areCoursesLoading, setAreCoursesLoading] = useState(true);
+    const [courses, setCourses] = useState({});
+    useEffect(() => {
+        setAreCoursesLoading(true);
+        axios({
+            method: 'get',
+            url: '/api/courses',
+        })
+            .then((response) => {
+                let fetchedCourses = response.data.body;
+                setCourses(fetchedCourses);
+                setAreCoursesLoading(false)
+            }).catch((e) => {
+            alert(e);
+        })
+    }, []);
+
+    CycleButton.propTypes = {
+        code: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired
+    };
+
     function CycleButton(props) {
         const {code, text} = props;
         return (
@@ -21,10 +44,15 @@ function HomePage({connectedUser}) {
         );
     }
 
-    CycleButton.propTypes = {
-        code: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired
-    };
+    function CourseLinks({courses, selectedCycle}) {
+        return (
+            <React.Fragment>
+                {courses.map((course) =>
+                    course.cycle === selectedCycle && <CourseLink to={"/courses/" + course.id} text={course.name}/>)}
+            </React.Fragment>
+        );
+
+    }
 
     return (
         <div>
@@ -39,8 +67,14 @@ function HomePage({connectedUser}) {
                     </div>
                 </section>
                 <section className="section">
-                    <CourseLink to="#" text="Physique"/>
-                    <CourseLink to="#" text="Mathématiques"/>
+                    {
+                        areCoursesLoading ?
+                            (
+                                <p>Loading...</p>
+                            ) : (
+                                <CourseLinks courses={courses} selectedCycle={selectedCycle}/>
+                            )
+                    }
                 </section>
             </div>
         </div>
