@@ -48,7 +48,8 @@ function HomePage({connectedUser}) {
         return (
             <React.Fragment>
                 {courses.map((course) =>
-                    course.cycle === selectedCycle && <CourseLink to={"/courses/" + course.id} text={course.name}/>)}
+                    course.cycle === selectedCycle &&
+                    <CourseLink to={"/courses/" + course.id} text={course.name} key={course.id}/>)}
             </React.Fragment>
         );
 
