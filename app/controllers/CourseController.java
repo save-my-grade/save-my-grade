@@ -2,6 +2,7 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Course;
+import models.Sheet;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -25,6 +26,12 @@ public class CourseController extends Controller {
         } else {
             return ok(Util.createResponse(jsonObject, true));
         }
+    }
+
+    public Result getCourseSheets(Integer id) {
+        List<Sheet> sheets = Sheet.find.query().where().eq("course_id", id).findList();
+        JsonNode jsonObject = Json.toJson(sheets);
+        return ok(Util.createResponse(jsonObject, true));
     }
 
     public Result createCourse(Http.Request request) {

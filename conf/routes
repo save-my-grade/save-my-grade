@@ -18,6 +18,7 @@ POST        /api/sheets                   controllers.SheetController.createShee
 
 # Course
 GET         /api/courses/:courseId        controllers.CourseController.getCourse(courseId:Integer)
+GET         /api/courses/:courseId/sheets controllers.CourseController.getCourseSheets(courseId:Integer)
 GET         /api/courses                  controllers.CourseController.getAllCourses
 POST        /api/courses                  controllers.CourseController.createCourse(request: Request)
 

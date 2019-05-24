@@ -9,7 +9,7 @@ function CoursePage({match, connectedUser}) {
         setIsCourseLoading(true);
         axios({
             method: 'get',
-            url: '/api/courses/'+match.params.id,
+            url: '/api/courses/' + match.params.id,
         })
             .then((response) => {
                 let fetchedCourse = response.data.body;
@@ -19,6 +19,24 @@ function CoursePage({match, connectedUser}) {
             alert(e);
         })
     }, [match.params.id]);
+
+    const [sheets, setSheets] = useState([]);
+    const [areSheetsLoading, setAreSheetsLoading] = useState(true);
+    useEffect(() => {
+        setAreSheetsLoading(true);
+        axios({
+            method: 'get',
+            url: '/api/courses/' + match.params.id + '/sheets',
+        })
+            .then((response) => {
+                let fetchedSheets = response.data.body;
+                setSheets(fetchedSheets);
+                setAreSheetsLoading(false)
+            }).catch((e) => {
+            alert(e);
+        })
+    }, [match.params.id]);
+
     return (
         <React.Fragment>
             <NavBar connectedUser={connectedUser}/>
@@ -28,6 +46,11 @@ function CoursePage({match, connectedUser}) {
                         <h1 className="title">Loading...</h1>
                     ) : (
                         <h1 className="title">{course.name}</h1>
+                    )}
+                </section>
+                <section className="section">
+                    {!areSheetsLoading && sheets.map(
+                        (sheet) => <h2>{sheet.name}</h2>
                     )}
                 </section>
             </div>
