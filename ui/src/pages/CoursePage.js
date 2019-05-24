@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import NavBar from "../components/NavBar";
 import axios from "axios";
 import SheetCard from "../components/SheetCard";
+import Loader from "../components/Loader";
 
 function CoursePage({match, connectedUser}) {
     const [course, setCourse] = useState({});
@@ -43,14 +44,12 @@ function CoursePage({match, connectedUser}) {
             <NavBar connectedUser={connectedUser}/>
             <div className="page-content">
                 <section className="section">
-                    {isCourseLoading ? (
-                        <h1 className="title">Loading...</h1>
-                    ) : (
+                    {!isCourseLoading && (
                         <h1 className="title">{course.name}</h1>
                     )}
                 </section>
                 <section className="section">
-                    {!areSheetsLoading && sheets.map(
+                    {areSheetsLoading ? (<Loader/>) : sheets.map(
                         (sheet) => <SheetCard sheet={sheet}/>
                     )}
                 </section>

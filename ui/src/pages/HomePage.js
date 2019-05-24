@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import CourseLink from "../components/CourseLink";
 import NavBar from "../components/NavBar";
 import axios from "axios";
+import Loader from "../components/Loader";
 
 
 HomePage.propTypes = {
@@ -71,7 +72,7 @@ function HomePage({connectedUser}) {
                     {
                         areCoursesLoading ?
                             (
-                                <p>Loading...</p>
+                                <Loader/>
                             ) : (
                                 <CourseLinks courses={courses} selectedCycle={selectedCycle}/>
                             )
