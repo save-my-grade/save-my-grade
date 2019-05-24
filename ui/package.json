@@ -15,8 +15,7 @@
     "react-avatar": "^3.6.0",
     "react-cookie": "^4.0.0",
     "formik": "^1.5.7",
-    "axios": "^0.18.0",
-    "react-select": "^2.4.3"
+    "axios": "^0.18.0"
   },
   "scripts": {
     "start": "react-scripts start",
