@@ -18,7 +18,7 @@ function CreateSheetModal({isActive, toggle, connectedUser}) {
                     <p className="modal-card-title">Nouvelle fiche</p>
                     <button className="delete" aria-label="close" onClick={toggle}/>
                 </header>
-                <section className="modal-card-body">
+                <section className="modal-card-body has-text-centered">
                     <CreateSheetForm connectedUser={connectedUser} successCallback={() => {
                         alert("Fiche créée avec succès !");
                         toggle();
