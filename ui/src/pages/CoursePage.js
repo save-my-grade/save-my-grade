@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import NavBar from "../components/NavBar";
 import axios from "axios";
+import SheetCard from "../components/SheetCard";
 
 function CoursePage({match, connectedUser}) {
     const [course, setCourse] = useState({});
@@ -50,7 +51,7 @@ function CoursePage({match, connectedUser}) {
                 </section>
                 <section className="section">
                     {!areSheetsLoading && sheets.map(
-                        (sheet) => <h2>{sheet.name}</h2>
+                        (sheet) => <SheetCard sheet={sheet}/>
                     )}
                 </section>
             </div>
