@@ -32,5 +32,15 @@ public class SheetController extends Controller {
         JsonNode jsonObject = Json.toJson(sheet);
         return created(Util.createResponse(jsonObject, true));
     }
+    public Result delete(Integer id) {
+        Sheet sheet = Sheet.find.byId(id);
+        if(sheet == null){
+            JsonNode jsonObject = Json.toJson(sheet);
+            return ok(Util.createResponse(jsonObject, false));
+        }
+        sheet.delete();
+        JsonNode jsonObject = Json.toJson(sheet);
+        return created(Util.createResponse(jsonObject, true));
+    }
 }
  

@@ -15,6 +15,7 @@ POST        /api/users                    controllers.UserController.create(requ
 # Sheets
 GET         /api/sheets/:sheetId          controllers.SheetController.getSheet(sheetId:Integer)
 POST        /api/sheets                   controllers.SheetController.createSheet(request: Request)
+POST        /api/sheetsDelete/:sheetId     controllers.SheetController.delete(sheetId:Integer)
 
 # Course
 GET         /api/courses/:courseId        controllers.CourseController.getCourse(courseId:Integer)
