@@ -4,6 +4,7 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.data.FormFactory;
+import play.libs.Files.TemporaryFile;
 
 import javax.imageio.ImageIO;
 import javax.inject.*;
@@ -22,19 +23,16 @@ public class HomeController extends Controller {
 
 	@Inject
 	FormFactory formFactory;
-}	
-	/*
+
+	
   public Result upload(Http.Request request) throws IOException {
 	  
-	
-	File file = request.body().asRaw().asBytes();
-	File outputfile = new File("saved.png");
-    if (file != null) {
-    	ImageIO.write(file, "png", outputfile);
-    	//Files.copy(file.toPath(), Paths.get("C:\\Users\\nroye\\Desktop\\Technoweb\\Destination.png"));
-      return ok("File uploaded");
-    } else {
-      return badRequest().flashing("error", "Missing file");
-    }
-  }
-}*/
+	  File file = request.body().asRaw().asFile();
+	    if (file != null) {
+	    	Files.copy(file.toPath(), Paths.get("C:\\Users\\nroye\\Desktop\\Technoweb\\"+"Convention"+".png"));
+	      return ok("File uploaded");
+	    } else {
+	      return badRequest().flashing("error", "Missing file");
+	    }
+	  }
+	}
