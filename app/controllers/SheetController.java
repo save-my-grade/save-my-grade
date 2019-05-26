@@ -35,7 +35,6 @@ public class SheetController extends Controller {
     public Result delete(Integer id) {
         Sheet sheet = Sheet.find.byId(id);
         if(sheet == null){
-            JsonNode jsonObject = Json.toJson(sheet);
             return notFound("Sheet does not exist");
         }
         sheet.delete();
