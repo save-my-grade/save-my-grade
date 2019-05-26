@@ -28,12 +28,6 @@ public class CourseController extends Controller {
         }
     }
 
-    public Result getCourseSheets(Integer id) {
-        List<Sheet> sheets = Sheet.find.query().where().eq("course_id", id).findList();
-        JsonNode jsonObject = Json.toJson(sheets);
-        return ok(Util.createResponse(jsonObject, true));
-    }
-
     public Result createCourse(Http.Request request) {
         Course course;
         try {
