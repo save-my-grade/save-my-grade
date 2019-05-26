@@ -32,5 +32,24 @@ public class SheetController extends Controller {
         JsonNode jsonObject = Json.toJson(sheet);
         return created(Util.createResponse(jsonObject, true));
     }
+
+    public Result editSheet(Http.Request request,Integer id) {
+        Sheet sheet = Sheet.find.byId(id);
+        if(sheet == null){
+            JsonNode jsonObject = Json.toJson(sheet);
+            return ok(Util.createResponse(jsonObject, false));
+        }
+        Sheet newSheet;
+        try {
+            newSheet = Json.fromJson(Util.requestBodyToJson(request), Sheet.class);
+        } catch (Exception e) {
+            return badRequest(Util.createResponse(
+                    "Expecting Json data", false));
+        }
+        newSheet.setId(id);
+        newSheet.update("default");
+        JsonNode jsonObject = Json.toJson(newSheet);
+        return created(Util.createResponse(jsonObject, true));
+    }
 }
  
