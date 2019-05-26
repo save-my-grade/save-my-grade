@@ -36,7 +36,6 @@ public class SheetController extends Controller {
     public Result editSheet(Http.Request request,Integer id) {
         Sheet sheet = Sheet.find.byId(id);
         if(sheet == null){
-            JsonNode jsonObject = Json.toJson(sheet);
             return notFound("Sheet does not exist");
         }
         Sheet newSheet;
@@ -49,7 +48,7 @@ public class SheetController extends Controller {
         newSheet.setId(id);
         newSheet.update("default");
         JsonNode jsonObject = Json.toJson(newSheet);
-        return created(Util.createResponse(jsonObject, true));
+        return ok(Util.createResponse(jsonObject, true));
     }
 }
  
