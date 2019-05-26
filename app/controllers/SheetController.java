@@ -8,6 +8,8 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 
+import java.util.List;
+
 public class SheetController extends Controller {
     public Result getSheet(Integer id) {
 
@@ -32,6 +34,7 @@ public class SheetController extends Controller {
         JsonNode jsonObject = Json.toJson(sheet);
         return created(Util.createResponse(jsonObject, true));
     }
+  
     public Result delete(Integer id) {
         Sheet sheet = Sheet.find.byId(id);
         if(sheet == null){
@@ -39,6 +42,12 @@ public class SheetController extends Controller {
         }
         sheet.delete();
         return ok("sheet has been deleted");
+    }
+  
+    public Result getCourseSheets(Integer courseId) {
+        List<Sheet> sheets = Sheet.find.query().where().eq("course_id", courseId).findList();
+        JsonNode jsonObject = Json.toJson(sheets);
+        return ok(Util.createResponse(jsonObject, true));
     }
 }
  
