@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import CourseLink from "../components/CourseLink";
 import NavBar from "../components/NavBar";
 import axios from "axios";
+import Loader from "../components/Loader";
 
 
 HomePage.propTypes = {
@@ -48,7 +49,8 @@ function HomePage({connectedUser}) {
         return (
             <React.Fragment>
                 {courses.map((course) =>
-                    course.cycle === selectedCycle && <CourseLink to={"/courses/" + course.id} text={course.name}/>)}
+                    course.cycle === selectedCycle &&
+                    <CourseLink to={"/courses/" + course.id} text={course.name} key={course.id}/>)}
             </React.Fragment>
         );
 
@@ -70,7 +72,7 @@ function HomePage({connectedUser}) {
                     {
                         areCoursesLoading ?
                             (
-                                <p>Loading...</p>
+                                <Loader/>
                             ) : (
                                 <CourseLinks courses={courses} selectedCycle={selectedCycle}/>
                             )
