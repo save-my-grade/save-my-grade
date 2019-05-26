@@ -37,7 +37,7 @@ public class SheetController extends Controller {
         Sheet sheet = Sheet.find.byId(id);
         if(sheet == null){
             JsonNode jsonObject = Json.toJson(sheet);
-            return ok(Util.createResponse(jsonObject, false));
+            return Forbidden("Sheet does not exist");
         }
         Sheet newSheet;
         try {
