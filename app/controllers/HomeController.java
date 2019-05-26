@@ -4,8 +4,11 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.data.FormFactory;
+
+import javax.imageio.ImageIO;
 import javax.inject.*;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
@@ -19,34 +22,19 @@ public class HomeController extends Controller {
 
 	@Inject
 	FormFactory formFactory;
-	
-	
+}	
+	/*
   public Result upload(Http.Request request) throws IOException {
 	  
 	
-	File file = request.body().asRaw().asFile();
+	File file = request.body().asRaw().asBytes();
+	File outputfile = new File("saved.png");
     if (file != null) {
-    Files.copy(file.toPath(), Paths.get("C:\\Users\\nroye\\Desktop\\Technoweb\\Destination.png"));
+    	ImageIO.write(file, "png", outputfile);
+    	//Files.copy(file.toPath(), Paths.get("C:\\Users\\nroye\\Desktop\\Technoweb\\Destination.png"));
       return ok("File uploaded");
     } else {
       return badRequest().flashing("error", "Missing file");
     }
   }
-}
-/*
-public void saveReport(File file)
-	    throws IOException
-	{
-	    final String content = report.getProperty("TEXT");
-	    final Path path = Paths.get("logKMAX.txt");
-
-	    try (
-	        final BufferedWriter writer = Files.newBufferedWriter(path,
-	            StandardCharsets.UTF_8, StandardOpenOption.CREATE);
-	    ) {
-	        writer.write(content);
-	        writer.flush();
-	    }
-	}
-}
-  */
+}*/
