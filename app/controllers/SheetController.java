@@ -36,11 +36,10 @@ public class SheetController extends Controller {
         Sheet sheet = Sheet.find.byId(id);
         if(sheet == null){
             JsonNode jsonObject = Json.toJson(sheet);
-            return ok(Util.createResponse(jsonObject, false));
+            return notFound("Sheet does not exist");
         }
         sheet.delete();
-        JsonNode jsonObject = Json.toJson(sheet);
-        return created(Util.createResponse(jsonObject, true));
+        return ok("sheet has been deleted");
     }
 }
  
