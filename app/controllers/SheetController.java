@@ -34,7 +34,16 @@ public class SheetController extends Controller {
         JsonNode jsonObject = Json.toJson(sheet);
         return created(Util.createResponse(jsonObject, true));
     }
-
+  
+    public Result delete(Integer id) {
+        Sheet sheet = Sheet.find.byId(id);
+        if(sheet == null){
+            return notFound("Sheet does not exist");
+        }
+        sheet.delete();
+        return ok("sheet has been deleted");
+    }
+  
     public Result getCourseSheets(Integer courseId) {
         List<Sheet> sheets = Sheet.find.query().where().eq("course_id", courseId).findList();
         JsonNode jsonObject = Json.toJson(sheets);
