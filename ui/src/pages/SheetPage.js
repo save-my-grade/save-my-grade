@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import NavBar from "../components/NavBar";
 import axios from "axios";
+import EditSheetModal from "../components/EditSheetModal";
 import Breadcrumb from "../components/Breadcrumb";
 
 function SheetPage({match, connectedUser}) {
@@ -67,6 +68,10 @@ function SheetPage({match, connectedUser}) {
         });
     };
 
+    const [isEditSheetModalActive, setEditSheetModalActive] = useState(false);
+    const handleEdit=() =>{
+        setEditSheetModalActive(!isEditSheetModalActive);
+    };
     return (
         <React.Fragment>
             <NavBar connectedUser={connectedUser}/>
@@ -96,11 +101,24 @@ function SheetPage({match, connectedUser}) {
                             </div>
                         </div>
                     </section>
+                    <button onClick={handleDelete}
+                            className="button is-danger is-outlined">
+                        Supprimer
+                    </button>
+
+                    <button onClick={handleEdit}
+                            className="button is-outlined">
+                        Modifier
+                    </button>
+
+                <EditSheetModal isActive={isEditSheetModalActive}
+                connectedUser={connectedUser} sheet={sheet} toggle={handleEdit}/>
                     {sheet.authorId === connectedUser.id && <button onClick={handleDelete}
                                                                     className="button level-item is-danger is-outlined">
                         Supprimer
                     </button>}
                 </div>
+
             )}
         </React.Fragment>
     );
