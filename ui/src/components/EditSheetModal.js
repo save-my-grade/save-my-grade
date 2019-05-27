@@ -17,14 +17,15 @@ function CreateSheetModal({isActive, toggle, connectedUser, sheet}) {
             <div className="modal-background" onClick={toggle}/>
             <div className="modal-card">
                 <header className="modal-card-head">
-                    <p className="modal-card-title">Nouvelle fiche</p>
+                    <p className="modal-card-title">Edition de fiche</p>
                     <button className="delete" aria-label="close" onClick={toggle}/>
                 </header>
                 <section className="modal-card-body has-text-centered">
                     {sheetEditionStage === "update" && <EditSheetForm setSheetEditionStage={setSheetEditionStage} connectedUser={connectedUser} sheet={sheet} successCallback={() => {
-                            window.location.href="/"
+                            toggle();
+                            window.location.href="/";
                         }} failureCallback={() => {
-                            alert("Une erreur s'est produite lors de l'édition de la fiche.")
+                            alert("Une erreur s'est produite lors de l'édition de la fiche.");
                         }}/>}
                 </section>
             </div>
