@@ -79,9 +79,7 @@ function NewSheetInfoForm({setSheetEditionStage,sheet,connectedUser, successCall
         >
             {({isSubmitting}) => (
                 <Form>
-                    <Field type="text" name="file" className="input" placeholder="Fichier PDF, PNG..." disabled/>
-                    <div style={{marginTop: 10}}/>
-                    <Field type="text" name="name" className="input" placeholder="Nom de la fiche"/>
+                    <Field type="text" name="name" className="input" placeholder="Nom de la fiche" value={sheet.name}/>
                     <ErrorMessage name="name" component="div"/>
                     <div style={{marginTop: 10}}/>
                     <div className={classNames("select", {'is-loading': areCoursesLoading})} style={{width: '100%'}}>
@@ -106,7 +104,8 @@ function NewSheetInfoForm({setSheetEditionStage,sheet,connectedUser, successCall
                     <ErrorMessage name="courseId" component="div"/>
                     <div style={{marginTop: 10}}/>
                     <Field type="text" name="tags" className="input"
-                           placeholder="Tags (chapitre, sujet...) séparés d'une virgule"/>
+                           placeholder="Tags (chapitre, sujet...) séparés d'une virgule"
+                           value={sheet.tags}/>
                     <div style={{marginTop: 10}}/>
                     <button type="submit" disabled={isSubmitting}
                             className={classNames("button", "is-info", {"is-loading": isSubmitting})}>

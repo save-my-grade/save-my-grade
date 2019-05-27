@@ -7,7 +7,6 @@ function SheetPage({match, connectedUser}) {
     const sheetId = match.params.id;
 
     const [sheet, setSheet] = useState({});
-    const [author, setAuthor] = useState({});
     const [isSheetLoading, setIsSheetLoading] = useState(true);
     useEffect(() => {
         setIsSheetLoading(true);
@@ -42,7 +41,7 @@ function SheetPage({match, connectedUser}) {
     };
 
     const [isEditSheetModalActive, setEditSheetModalActive] = useState(false);
-    const edit=() =>{
+    const toggle=() =>{
         setEditSheetModalActive(!isEditSheetModalActive);
     };
     return (
@@ -66,12 +65,12 @@ function SheetPage({match, connectedUser}) {
                         Supprimer
                     </button>
 
-                    <button onClick={edit}>
+                    <button onClick={toggle}>
                         Edit
                     </button>
 
                 <EditSheetModal isActive={isEditSheetModalActive}
-                connectedUser={connectedUser} sheet={sheet}/>
+                connectedUser={connectedUser} sheet={sheet} toggle={toggle}/>
                 </div>
 
             )}
