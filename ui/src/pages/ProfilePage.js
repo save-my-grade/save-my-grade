@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react';
 import NavBar from "../components/NavBar";
+import {NavLink} from "react-router-dom";
 
 ProfilePage.propTypes = {
     connectedUser: PropTypes.object.isRequired,

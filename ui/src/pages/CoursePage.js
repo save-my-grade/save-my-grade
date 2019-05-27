@@ -50,7 +50,7 @@ function CoursePage({match, connectedUser}) {
                 </section>
                 <section className="section">
                     {areSheetsLoading ? (<Loader/>) : sheets.map(
-                        (sheet) => <SheetCard sheet={sheet}/>
+                        (sheet) => <SheetCard  sheet={sheet} to={"/sheet/" + sheet.id}/>
                     )}
                 </section>
             </div>

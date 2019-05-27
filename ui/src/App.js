@@ -7,6 +7,7 @@ import {useCookies} from "react-cookie";
 import axios from "axios";
 import ProfilePage from "./pages/ProfilePage";
 import CoursePage from "./pages/CoursePage";
+import SheetPage from "./pages/SheetPage";
 
 function App() {
     const [cookies, setCookie, removeCookie] = useCookies(['token', 'id']);
@@ -55,6 +56,8 @@ function App() {
                 <PrivateRoute path="/profile" component={ProfilePage} isLoggedIn={isLoggedIn}
                               componentProps={{handleLogout, connectedUser}}/>
                 <PrivateRoute path="/courses/:id" component={CoursePage} isLoggedIn={isLoggedIn}
+                              componentProps={{connectedUser}}/>
+                <PrivateRoute path="/sheet/:id" component={SheetPage} isLoggedIn={isLoggedIn}
                               componentProps={{connectedUser}}/>
                 <Route render={() => <Redirect to={{pathname: "/home"}}/>}/>
             </Switch>
