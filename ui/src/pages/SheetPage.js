@@ -69,7 +69,7 @@ function SheetPage({match, connectedUser}) {
     };
 
     const [isEditSheetModalActive, setEditSheetModalActive] = useState(false);
-    const handleEdit=() =>{
+    const handleEdit = () => {
         setEditSheetModalActive(!isEditSheetModalActive);
     };
     return (
@@ -101,22 +101,21 @@ function SheetPage({match, connectedUser}) {
                             </div>
                         </div>
                     </section>
-                    <button onClick={handleDelete}
-                            className="button is-danger is-outlined">
-                        Supprimer
-                    </button>
 
-                    <button onClick={handleEdit}
-                            className="button is-outlined">
-                        Modifier
-                    </button>
-
-                <EditSheetModal isActive={isEditSheetModalActive}
-                connectedUser={connectedUser} sheet={sheet} toggle={handleEdit}/>
-                    {sheet.authorId === connectedUser.id && <button onClick={handleDelete}
-                                                                    className="button level-item is-danger is-outlined">
-                        Supprimer
-                    </button>}
+                    <EditSheetModal isActive={isEditSheetModalActive}
+                                    connectedUser={connectedUser} sheet={sheet} toggle={handleEdit}/>
+                    {sheet.authorId === connectedUser.id && (
+                        <div>
+                            <button onClick={handleDelete}
+                                    className="button is-danger is-outlined">
+                                Supprimer
+                            </button>
+                            <button onClick={handleEdit}
+                                    className="button is-outlined">
+                                Modifier
+                            </button>
+                        </div>
+                    )}
                 </div>
 
             )}
