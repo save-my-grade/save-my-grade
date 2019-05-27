@@ -23,9 +23,6 @@ function ProfilePage({handleLogout, connectedUser}) {
                     Déconnexion
                 </button>
             </section>
-            <NavLink to="/sheet/13773" className="navbar-item link">
-                <h1>test</h1>
-            </NavLink>
         </React.Fragment>
     );
 

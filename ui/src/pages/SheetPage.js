@@ -21,7 +21,6 @@ function SheetPage({match, connectedUser}) {
             alert(e);
         })
     }, [match.params.id]);
-    const sheetPath="../../../user-files/sheets/"+sheet.filePath;
     return (
         <React.Fragment>
             <NavBar connectedUser={connectedUser}/>
@@ -31,7 +30,7 @@ function SheetPage({match, connectedUser}) {
                         <h1 className="title">{sheet.name}</h1>
                     </section>
                     <section className="section">
-                        <img src={require(sheetPath)}  alt="sheet"></img>
+                        <img src={require("../../../user-files/sheets/"+sheet.filePath)}  alt="sheet"></img>
                     </section>
                 </div>
             )}
@@ -40,5 +39,4 @@ function SheetPage({match, connectedUser}) {
 
 }
 
-//sheet.filePath
 export default SheetPage;
