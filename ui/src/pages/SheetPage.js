@@ -41,7 +41,7 @@ function SheetPage({match, connectedUser}) {
     };
 
     const [isEditSheetModalActive, setEditSheetModalActive] = useState(false);
-    const toggle=() =>{
+    const handleEdit=() =>{
         setEditSheetModalActive(!isEditSheetModalActive);
     };
     return (
@@ -61,16 +61,17 @@ function SheetPage({match, connectedUser}) {
                         <img src={require("../../../user-files/sheets/" + sheet.filePath)} alt="sheet"/>
                     </section>
                     <button onClick={handleDelete}
-                            className="button level-item is-danger is-outlined">
+                            className="button is-danger is-outlined">
                         Supprimer
                     </button>
 
-                    <button onClick={toggle}>
-                        Edit
+                    <button onClick={handleEdit}
+                            className="button is-outlined">
+                        Modifier
                     </button>
 
                 <EditSheetModal isActive={isEditSheetModalActive}
-                connectedUser={connectedUser} sheet={sheet} toggle={toggle}/>
+                connectedUser={connectedUser} sheet={sheet} toggle={handleEdit}/>
                 </div>
 
             )}
