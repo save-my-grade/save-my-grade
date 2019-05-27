@@ -13,3 +13,4 @@ dist
 /.settings
 .gradle
 public/
+/user-files

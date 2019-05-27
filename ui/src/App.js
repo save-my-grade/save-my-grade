@@ -57,7 +57,7 @@ function App() {
                               componentProps={{handleLogout, connectedUser}}/>
                 <PrivateRoute path="/courses/:id" component={CoursePage} isLoggedIn={isLoggedIn}
                               componentProps={{connectedUser}}/>
-                <Route path="/FormPage/" component={FormPage}/>
+                <Route path="/FormPage" component={FormPage}/>
                 <Route render={() => <Redirect to={{pathname: "/home"}}/>}/>
             </Switch>
         </Router>

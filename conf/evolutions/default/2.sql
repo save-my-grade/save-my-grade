@@ -4,13 +4,13 @@
 
 CREATE TABLE sheet
 (
-  id          bigint(20)    NOT NULL AUTO_INCREMENT,
-  author_id    bigint(20)    NOT NULL,
-  course_id    bigint(20)    NOT NULL,
-  name        varchar(255)  NOT NULL,
-  tags        varchar(255),
-  file_path    varchar(255)  NOT NULL UNIQUE,
-  PRIMARY KEY (id)
+    id        bigint(20)   NOT NULL AUTO_INCREMENT,
+    author_id bigint(20),
+    course_id bigint(20),
+    name      varchar(255),
+    tags      varchar(255),
+    file_path varchar(255) UNIQUE,
+    PRIMARY KEY (id)
 );
 
 -- !Downs
