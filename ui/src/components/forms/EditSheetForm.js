@@ -46,8 +46,8 @@ function NewSheetInfoForm({setSheetEditionStage,sheet,connectedUser, successCall
                 id: sheet.id,
                 authorId: connectedUser.id,
                 courseId: '',
-                name: '',
-                tags: '',
+                name: sheet.name,
+                tags: sheet.tags,
                 filePath: sheet.filePath
             }}
             validate={values => {
@@ -79,7 +79,7 @@ function NewSheetInfoForm({setSheetEditionStage,sheet,connectedUser, successCall
         >
             {({isSubmitting}) => (
                 <Form>
-                    <Field type="text" name="name" className="input" placeholder="Nom de la fiche" value={sheet.name}/>
+                    <Field type="text" name="name" className="input" placeholder="Nom de la fiche"/>
                     <ErrorMessage name="name" component="div"/>
                     <div style={{marginTop: 10}}/>
                     <div className={classNames("select", {'is-loading': areCoursesLoading})} style={{width: '100%'}}>
@@ -104,10 +104,10 @@ function NewSheetInfoForm({setSheetEditionStage,sheet,connectedUser, successCall
                     <ErrorMessage name="courseId" component="div"/>
                     <div style={{marginTop: 10}}/>
                     <Field type="text" name="tags" className="input"
-                           placeholder="Tags (chapitre, sujet...) séparés d'une virgule"
-                           value={sheet.tags}/>
+                           placeholder="Tags (chapitre, sujet...) séparés d'une virgule"/>
                     <div style={{marginTop: 10}}/>
                     <button type="submit" disabled={isSubmitting}
+
                             className={classNames("button", "is-info", {"is-loading": isSubmitting})}>
                         Mettre à jour
                     </button>
