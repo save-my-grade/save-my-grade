@@ -80,8 +80,6 @@ function NewSheetInfoForm({connectedUser, draftSheet, successCallback, failureCa
         >
             {({isSubmitting}) => (
                 <Form>
-                    <Field type="text" name="file" className="input" placeholder="Fichier PDF, PNG..." disabled/>
-                    <div style={{marginTop: 10}}/>
                     <Field type="text" name="name" className="input" placeholder="Nom de la fiche"/>
                     <ErrorMessage name="name" component="div"/>
                     <div style={{marginTop: 10}}/>
@@ -111,7 +109,7 @@ function NewSheetInfoForm({connectedUser, draftSheet, successCallback, failureCa
                     <div style={{marginTop: 10}}/>
                     <button type="submit" disabled={isSubmitting}
                             className={classNames("button", "is-info", {"is-loading": isSubmitting})}>
-                        Mettre en ligne
+                        Créer la fiche
                     </button>
                 </Form>
             )}

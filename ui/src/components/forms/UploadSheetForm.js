@@ -34,7 +34,7 @@ class UploadSheetForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <div className="file">
+                <div className="file is-centered is-boxed">
                     <label className="file-label">
                         <input className="file-input" type="file" ref={this.fileInput}/>
                         <span className="file-cta">
