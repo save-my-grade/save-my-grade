@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import NavBar from "../components/NavBar";
 import axios from "axios";
+import {NavLink} from "react-router-dom";
 
 function SheetPage({match, connectedUser}) {
     const sheetId = match.params.id;
 
     const [sheet, setSheet] = useState({});
     const [author, setAuthor] = useState(null);
+    const [course, setCourse] = useState(null);
     const [isSheetLoading, setIsSheetLoading] = useState(true);
     useEffect(() => {
         setIsSheetLoading(true);
@@ -18,6 +20,7 @@ function SheetPage({match, connectedUser}) {
                 let fetchedSheet = response.data.body;
                 setSheet(fetchedSheet);
                 fetchAuthor(fetchedSheet.authorId);
+                fetchCourse(fetchedSheet.courseId);
                 setIsSheetLoading(false)
             })
             .catch((e) => {
@@ -33,6 +36,17 @@ function SheetPage({match, connectedUser}) {
             .then((response) => {
                 let author = response.data.body;
                 setAuthor(author);
+            })
+    };
+
+    const fetchCourse = (courseId) => {
+        axios({
+            method: 'get',
+            url: '/api/courses/' + courseId,
+        })
+            .then((response) => {
+                let course = response.data.body;
+                setCourse(course);
             })
     };
 
@@ -52,12 +66,30 @@ function SheetPage({match, connectedUser}) {
             alert(e);
         });
     };
+
+    const cycleFromCode = (code) => {
+        if (code === 'cii') {
+            return "CII";
+        } else if (code === 'prep') {
+            return "Prépa intégrée";
+        } else {
+            return "Cycle ingénieur";
+        }
+    };
+
     return (
         <React.Fragment>
             <NavBar connectedUser={connectedUser}/>
             {!isSheetLoading && (
                 <div className="page-content">
                     <section className="section">
+                        {course && <nav className="breadcrumb" aria-label="breadcrumbs">
+                            <ul>
+                                <li><NavLink to={"/"}>{cycleFromCode(course.cycle)}</NavLink></li>
+                                <li><NavLink to={"/courses/" + course.id}>{course.name}</NavLink></li>
+                                <li className="is-active"><a href="#" aria-current="page">{sheet.name}</a></li>
+                            </ul>
+                        </nav>}
                         <div className="level">
                             <div className="level-left">
                                 <h1 className="title">{sheet.name}</h1>
@@ -73,7 +105,12 @@ function SheetPage({match, connectedUser}) {
                         </div>
                     </section>
                     <section className="section">
-                        <img src={require("../../../user-files/sheets/" + sheet.filePath)} alt="sheet"/>
+                        <div className="columns is-centered">
+                            <div className="column is-four-fifths">
+                                <img src={require("../../../user-files/sheets/" + sheet.filePath)} alt="sheet"
+                                     style={{width: '100%'}}/>
+                            </div>
+                        </div>
                     </section>
                     {sheet.authorId === connectedUser.id && <button onClick={handleDelete}
                                                                     className="button level-item is-danger is-outlined">
