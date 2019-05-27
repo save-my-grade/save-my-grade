@@ -19,4 +19,13 @@ public class UserController extends Controller {
         JsonNode jsonObject = Json.toJson(user);
         return created(Util.createResponse(jsonObject, true));
     }
+    public Result getUser(Integer id) {
+        User user = User.find.byId(id);
+        JsonNode jsonObject = Json.toJson(user);
+        if (user == null) {
+            return notFound("User does not exist");
+        } else {
+            return ok(Util.createResponse(jsonObject, true));
+        }
+    }
 }

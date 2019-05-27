@@ -20,7 +20,7 @@ public class SheetController extends Controller {
         Sheet sheet = Sheet.find.byId(id);
         JsonNode jsonObject = Json.toJson(sheet);
         if (sheet == null) {
-            return ok(Util.createResponse(jsonObject, false));
+            return notFound("Sheet does not exist");
         } else {
             return ok(Util.createResponse(jsonObject, true));
         }
