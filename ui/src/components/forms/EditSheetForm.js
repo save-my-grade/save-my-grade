@@ -4,7 +4,7 @@ import axios from "axios";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import classNames from "classnames";
 
-NewSheetInfoForm.propTypes = {
+UpdateSheetInfoForm.propTypes = {
     failureCallback: PropTypes.func.isRequired,
     successCallback: PropTypes.func.isRequired,
     connectedUser: PropTypes.object.isRequired
@@ -20,7 +20,7 @@ function CourseOptions({courses, selectedCycle}) {
 
 }
 
-function NewSheetInfoForm({setSheetEditionStage,sheet,connectedUser, successCallback, failureCallback}) {
+function UpdateSheetInfoForm({setSheetEditionStage,sheet,connectedUser, successCallback, failureCallback}) {
     const [selectedCycle, setSelectedCycle] = useState("");
     const [areCoursesLoading, setAreCoursesLoading] = useState(true);
     const [courses, setCourses] = useState({});
@@ -118,5 +118,5 @@ function NewSheetInfoForm({setSheetEditionStage,sheet,connectedUser, successCall
 
 }
 
-export default NewSheetInfoForm;
+export default UpdateSheetInfoForm;
 

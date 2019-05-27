@@ -7,6 +7,7 @@ function SheetPage({match, connectedUser}) {
     const sheetId = match.params.id;
 
     const [sheet, setSheet] = useState({});
+    const [author, setAuthor] = useState({});
     const [isSheetLoading, setIsSheetLoading] = useState(true);
     useEffect(() => {
         setIsSheetLoading(true);

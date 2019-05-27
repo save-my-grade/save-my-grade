@@ -3,13 +3,13 @@ import * as PropTypes from "prop-types";
 import classNames from "classnames";
 import EditSheetForm from "./forms/EditSheetForm";
 
-CreateSheetModal.propTypes = {
+EditSheetModal.propTypes = {
     isActive: PropTypes.bool.isRequired,
     toggle: PropTypes.func.isRequired,
     connectedUser: PropTypes.object.isRequired
 };
 
-function CreateSheetModal({isActive, toggle, connectedUser, sheet}) {
+function EditSheetModal({isActive, toggle, connectedUser, sheet}) {
     const [sheetEditionStage, setSheetEditionStage] = useState("update");
 
     return (
@@ -34,4 +34,4 @@ function CreateSheetModal({isActive, toggle, connectedUser, sheet}) {
 
 }
 
-export default CreateSheetModal;
+export default EditSheetModal;
