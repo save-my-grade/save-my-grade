@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as PropTypes from "prop-types";
 import classNames from "classnames";
-import CreateSheetForm from "./forms/CreateSheetForm";
+import NewSheetInfoForm from "./forms/NewSheetInfoForm";
+import UploadSheetForm from "./forms/UploadSheetForm";
 
 CreateSheetModal.propTypes = {
     isActive: PropTypes.bool.isRequired,
@@ -10,6 +11,14 @@ CreateSheetModal.propTypes = {
 };
 
 function CreateSheetModal({isActive, toggle, connectedUser}) {
+    const [sheetCreationStage, setSheetCreationStage] = useState("upload");
+    const [draftSheet, setDraftSheet] = useState({});
+
+    function handleUploadSuccess(draftSheet) {
+        setDraftSheet(draftSheet);
+        setSheetCreationStage("info");
+    }
+
     return (
         <div className={classNames("modal", {'is-active': isActive})}>
             <div className="modal-background" onClick={toggle}/>
@@ -19,12 +28,16 @@ function CreateSheetModal({isActive, toggle, connectedUser}) {
                     <button className="delete" aria-label="close" onClick={toggle}/>
                 </header>
                 <section className="modal-card-body has-text-centered">
-                    <CreateSheetForm connectedUser={connectedUser} successCallback={() => {
-                        alert("Fiche créée avec succès !");
-                        toggle();
-                    }} failureCallback={() => {
-                        alert("Une erreur s'est produite lors de la création de la fiche.")
-                    }}/>
+                    {sheetCreationStage === "upload" ? (
+                        <UploadSheetForm handleUploadSuccess={handleUploadSuccess}/>
+                    ) : (
+                        <NewSheetInfoForm connectedUser={connectedUser} draftSheet={draftSheet} successCallback={() => {
+                            alert("Fiche créée avec succès !");
+                            toggle();
+                        }} failureCallback={() => {
+                            alert("Une erreur s'est produite lors de la création de la fiche.")
+                        }}/>
+                    )}
                 </section>
             </div>
         </div>

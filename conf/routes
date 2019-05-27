@@ -3,26 +3,30 @@
 # ~~~~
 
 # Serve index page from public directory
-GET         /                                    controllers.FrontendController.index()
+GET           /                                    controllers.FrontendController.index()
 
 # Login
-POST        /api/login                           controllers.LoginController.login(request: Request)
-POST        /api/login/token                     controllers.LoginController.tokenCheck(request: Request)
+POST          /api/login                           controllers.LoginController.login(request: Request)
+POST          /api/login/token                     controllers.LoginController.tokenCheck(request: Request)
 
 # Users
-POST        /api/users                           controllers.UserController.create(request: Request)
+POST          /api/users                           controllers.UserController.create(request: Request)
 
 # Sheets
-GET         /api/sheets/:sheetId                 controllers.SheetController.getSheet(sheetId:Integer)
-POST        /api/sheets                          controllers.SheetController.createSheet(request: Request)
-DELETE      /api/sheets/:sheetId                 controllers.SheetController.delete(sheetId:Integer)
-PUT         /api/sheets/:sheetId                 controllers.SheetController.editSheet(request: Request, sheetId:Integer)
+GET           /api/sheets/:sheetId                 controllers.SheetController.getSheet(sheetId:Integer)
+POST          /api/sheets                          controllers.SheetController.createSheet(request: Request)
+DELETE        /api/sheets/:sheetId                 controllers.SheetController.delete(sheetId:Integer)
+PUT           /api/sheets/:sheetId                 controllers.SheetController.editSheet(request: Request, sheetId:Integer)
 
 # Course
-GET         /api/courses/:courseId               controllers.CourseController.getCourse(courseId:Integer)
-GET         /api/courses/:courseId/sheets        controllers.SheetController.getCourseSheets(courseId:Integer)
-GET         /api/courses                         controllers.CourseController.getAllCourses
-POST        /api/courses                         controllers.CourseController.createCourse(request: Request)
+GET           /api/courses/:courseId               controllers.CourseController.getCourse(courseId:Integer)
+GET           /api/courses/:courseId/sheets        controllers.SheetController.getCourseSheets(courseId:Integer)
+GET           /api/courses                         controllers.CourseController.getAllCourses
+POST          /api/courses                         controllers.CourseController.createCourse(request: Request)
+
+POST          /api/upload                          controllers.SheetController.uploadSheet(request: Request)
 
 # Serve static assets under public directory
-GET         /*file                               controllers.FrontendController.assetOrDefault(file)
+GET           /*file                               controllers.FrontendController.assetOrDefault(file)
+
+POST          /api/upload                          controllers.HomeController.upload(request: Request)

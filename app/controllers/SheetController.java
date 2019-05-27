@@ -8,6 +8,10 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class SheetController extends Controller {
@@ -19,6 +23,25 @@ public class SheetController extends Controller {
             return ok(Util.createResponse(jsonObject, false));
         } else {
             return ok(Util.createResponse(jsonObject, true));
+        }
+    }
+
+    public Result uploadSheet(Http.Request request) {
+        Sheet sheet = new Sheet();
+        sheet.save();
+        File file = request.body().asRaw().asFile();
+        if (file != null) {
+            try {
+                Files.copy(file.toPath(), Paths.get("user-files/sheets/" + sheet.getId() + ".png"));
+            } catch (IOException e) {
+                return internalServerError("Could not save file");
+            }
+            sheet.setFilePath(sheet.getId() + ".png");
+            sheet.save();
+            JsonNode jsonObject = Json.toJson(sheet);
+            return created(Util.createResponse(jsonObject, true));
+        } else {
+            return badRequest("Missing file");
         }
     }
 
@@ -34,10 +57,10 @@ public class SheetController extends Controller {
         JsonNode jsonObject = Json.toJson(sheet);
         return created(Util.createResponse(jsonObject, true));
     }
-  
-    public Result editSheet(Http.Request request,Integer id) {
+
+    public Result editSheet(Http.Request request, Integer id) {
         Sheet sheet = Sheet.find.byId(id);
-        if(sheet == null){
+        if (sheet == null) {
             return notFound("Sheet does not exist");
         }
         Sheet newSheet;
@@ -52,16 +75,16 @@ public class SheetController extends Controller {
         JsonNode jsonObject = Json.toJson(newSheet);
         return ok(Util.createResponse(jsonObject, true));
     }
-  
+
     public Result delete(Integer id) {
         Sheet sheet = Sheet.find.byId(id);
-        if(sheet == null){
+        if (sheet == null) {
             return notFound("Sheet does not exist");
         }
         sheet.delete();
         return ok("sheet has been deleted");
     }
-  
+
     public Result getCourseSheets(Integer courseId) {
         List<Sheet> sheets = Sheet.find.query().where().eq("course_id", courseId).findList();
         JsonNode jsonObject = Json.toJson(sheets);

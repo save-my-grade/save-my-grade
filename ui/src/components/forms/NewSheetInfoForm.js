@@ -4,7 +4,7 @@ import axios from "axios";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import classNames from "classnames";
 
-CreateSheetForm.propTypes = {
+NewSheetInfoForm.propTypes = {
     failureCallback: PropTypes.func.isRequired,
     successCallback: PropTypes.func.isRequired,
     connectedUser: PropTypes.object.isRequired
@@ -20,7 +20,7 @@ function CourseOptions({courses, selectedCycle}) {
 
 }
 
-function CreateSheetForm({connectedUser, successCallback, failureCallback}) {
+function NewSheetInfoForm({connectedUser, draftSheet, successCallback, failureCallback}) {
     const [selectedCycle, setSelectedCycle] = useState("");
 
     const [areCoursesLoading, setAreCoursesLoading] = useState(true);
@@ -44,11 +44,12 @@ function CreateSheetForm({connectedUser, successCallback, failureCallback}) {
     return (
         <Formik
             initialValues={{
+                id: draftSheet.id,
                 authorId: connectedUser.id,
                 courseId: '',
                 name: '',
                 tags: '',
-                filePath: '/change/this/' + Math.random()
+                filePath: draftSheet.filePath
             }}
             validate={values => {
                 let errors = {};
@@ -62,8 +63,8 @@ function CreateSheetForm({connectedUser, successCallback, failureCallback}) {
             }}
             onSubmit={(values, {setSubmitting, resetForm}) => {
                 axios({
-                    method: 'post',
-                    url: '/api/sheets',
+                    method: 'put',
+                    url: '/api/sheets/' + draftSheet.id,
                     data: values
                 })
                     .then(() => {
@@ -119,5 +120,5 @@ function CreateSheetForm({connectedUser, successCallback, failureCallback}) {
 
 }
 
-export default CreateSheetForm;
+export default NewSheetInfoForm;
 
