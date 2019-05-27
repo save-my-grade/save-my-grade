@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 import axios from "axios";
 import SheetCard from "../components/SheetCard";
 import Loader from "../components/Loader";
-import {NavLink} from "react-router-dom";
+import Breadcrumb from "../components/Breadcrumb";
 
 function CoursePage({match, connectedUser}) {
     const [course, setCourse] = useState({});
@@ -40,16 +40,6 @@ function CoursePage({match, connectedUser}) {
         })
     }, [match.params.id]);
 
-    const cycleFromCode = (code) => { //TODO: remove duplicate
-        if (code === 'cii') {
-            return "CII";
-        } else if (code === 'prep') {
-            return "Prépa intégrée";
-        } else {
-            return "Cycle ingénieur";
-        }
-    };
-
     return (
         <React.Fragment>
             <NavBar connectedUser={connectedUser}/>
@@ -57,13 +47,7 @@ function CoursePage({match, connectedUser}) {
                 <section className="section">
                     {!isCourseLoading && (
                         <div>
-                            <nav className="breadcrumb" aria-label="breadcrumbs">
-                                <ul>
-                                    <li><NavLink to={"/"}>{cycleFromCode(course.cycle)}</NavLink></li>
-                                    <li className="is-active"><NavLink
-                                        to={"/courses/" + course.id}>{course.name}</NavLink></li>
-                                </ul>
-                            </nav>
+                            <Breadcrumb course={course}/>
                             <h1 className="title">{course.name}</h1>
                         </div>
                     )}

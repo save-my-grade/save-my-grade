@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import NavBar from "../components/NavBar";
 import axios from "axios";
-import {NavLink} from "react-router-dom";
+import Breadcrumb from "../components/Breadcrumb";
 
 function SheetPage({match, connectedUser}) {
     const sheetId = match.params.id;
@@ -67,29 +67,13 @@ function SheetPage({match, connectedUser}) {
         });
     };
 
-    const cycleFromCode = (code) => {
-        if (code === 'cii') {
-            return "CII";
-        } else if (code === 'prep') {
-            return "Prépa intégrée";
-        } else {
-            return "Cycle ingénieur";
-        }
-    };
-
     return (
         <React.Fragment>
             <NavBar connectedUser={connectedUser}/>
             {!isSheetLoading && (
                 <div className="page-content">
                     <section className="section">
-                        {course && <nav className="breadcrumb" aria-label="breadcrumbs">
-                            <ul>
-                                <li><NavLink to={"/"}>{cycleFromCode(course.cycle)}</NavLink></li>
-                                <li><NavLink to={"/courses/" + course.id}>{course.name}</NavLink></li>
-                                <li className="is-active"><a href="#" aria-current="page">{sheet.name}</a></li>
-                            </ul>
-                        </nav>}
+                        {course && <Breadcrumb course={course} sheet={sheet}/>}
                         <div className="level">
                             <div className="level-left">
                                 <h1 className="title">{sheet.name}</h1>
