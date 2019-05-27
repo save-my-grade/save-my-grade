@@ -51,7 +51,7 @@ function CoursePage({match, connectedUser}) {
                 <section className="section has-text-centered">
                     {areSheetsLoading ? (<Loader/>) :
                         sheets.length ? sheets.map(
-                            (sheet) => <SheetCard sheet={sheet} to={"/sheet/" + sheet.id}/>
+                            (sheet) => <SheetCard sheet={sheet} to={"/sheet/" + sheet.id} key={sheet.id}/>
                         ) : (
                             <h2 className="subtitle">Il n'y a pas encore de fiche pour cette matière.</h2>
                         )}
