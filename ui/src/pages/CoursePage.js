@@ -48,10 +48,13 @@ function CoursePage({match, connectedUser}) {
                         <h1 className="title">{course.name}</h1>
                     )}
                 </section>
-                <section className="section">
-                    {areSheetsLoading ? (<Loader/>) : sheets.map(
-                        (sheet) => <SheetCard  sheet={sheet} to={"/sheet/" + sheet.id}/>
-                    )}
+                <section className="section has-text-centered">
+                    {areSheetsLoading ? (<Loader/>) :
+                        sheets.length ? sheets.map(
+                            (sheet) => <SheetCard sheet={sheet} to={"/sheet/" + sheet.id}/>
+                        ) : (
+                            <h2 className="subtitle">Il n'y a pas encore de fiche pour cette matière.</h2>
+                        )}
                 </section>
             </div>
         </React.Fragment>
