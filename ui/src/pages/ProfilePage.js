@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react';
 import NavBar from "../components/NavBar";
+import {NavLink} from "react-router-dom";
 
 ProfilePage.propTypes = {
     connectedUser: PropTypes.object.isRequired,
@@ -22,6 +23,9 @@ function ProfilePage({handleLogout, connectedUser}) {
                     Déconnexion
                 </button>
             </section>
+            <NavLink to="/sheet/13773" className="navbar-item link">
+                <h1>test</h1>
+            </NavLink>
         </React.Fragment>
     );
 
