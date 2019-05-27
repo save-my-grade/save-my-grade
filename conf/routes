@@ -29,5 +29,3 @@ POST          /api/upload                          controllers.SheetController.u
 
 # Serve static assets under public directory
 GET           /*file                               controllers.FrontendController.assetOrDefault(file)
-
-POST          /api/upload                          controllers.HomeController.upload(request: Request)

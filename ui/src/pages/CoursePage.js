@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import axios from "axios";
 import SheetCard from "../components/SheetCard";
 import Loader from "../components/Loader";
+import Breadcrumb from "../components/Breadcrumb";
 
 function CoursePage({match, connectedUser}) {
     const [course, setCourse] = useState({});
@@ -45,13 +46,16 @@ function CoursePage({match, connectedUser}) {
             <div className="page-content">
                 <section className="section">
                     {!isCourseLoading && (
-                        <h1 className="title">{course.name}</h1>
+                        <div>
+                            <Breadcrumb course={course}/>
+                            <h1 className="title">{course.name}</h1>
+                        </div>
                     )}
                 </section>
                 <section className="section has-text-centered">
                     {areSheetsLoading ? (<Loader/>) :
                         sheets.length ? sheets.map(
-                            (sheet) => <SheetCard sheet={sheet} to={"/sheet/" + sheet.id}/>
+                            (sheet) => <SheetCard sheet={sheet} to={"/sheet/" + sheet.id} key={sheet.id}/>
                         ) : (
                             <h2 className="subtitle">Il n'y a pas encore de fiche pour cette matière.</h2>
                         )}
