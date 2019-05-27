@@ -1,8 +1,10 @@
 import React from 'react';
+import classNames from "classnames";
 
 class UploadSheetForm extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {isUploading: false};
         const {handleUploadSuccess} = props;
         this.upload = (file) => {
             fetch('/api/upload', {
@@ -21,18 +23,32 @@ class UploadSheetForm extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.upload(this.fileInput.current.files[0]);
+        if (!this.fileInput.current.files[0]) {
+            alert("Veuillez sélectionner un fichier");
+        } else {
+            this.setState({isUploading: true});
+            this.upload(this.fileInput.current.files[0]);
+        }
     }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <label>
-                    Upload file:
-                    <input type="file" ref={this.fileInput}/>
-                </label>
+                <div className="file">
+                    <label className="file-label">
+                        <input className="file-input" type="file" ref={this.fileInput}/>
+                        <span className="file-cta">
+                            <span className="file-label">
+                                Sélectionnez un fichier...
+                            </span>
+                        </span>
+                    </label>
+                </div>
                 <br/>
-                <button type="submit">Submit</button>
+                <button type="submit"
+                        className={classNames("button", "is-info", {'is-loading': this.state.isUploading})}
+                        disabled={this.state.isUploading}>Mettre en ligne
+                </button>
             </form>
         );
     }
