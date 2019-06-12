@@ -49,12 +49,15 @@ function NavBar({connectedUser}) {
                 </div>
                 <div id="navbarMenu" className={classNames("navbar-menu", {"is-active": isMenuActive})}>
                     <div className="navbar-end">
-                        <button onClick={toggleCreateSheetModal}
-                                className="navbar-item button is-text has-text-info"
-                                style={{height: '100%'}}>
+                        <a onClick={toggleCreateSheetModal}
+                           className="navbar-item"
+                           style={{height: '100%'}}>
                             Ajouter une fiche
-                        </button>
-                        <NavLink to="/profile" className="navbar-item link">
+                        </a>
+                        {connectedUser.isAdmin && <NavLink to="/admin/courses" className="navbar-item">
+                            Espace administrateur
+                        </NavLink>}
+                        <NavLink to="/profile" className="navbar-item">
                             <Avatar name={connectedUser.firstName} round={true} size={40}/>
                         </NavLink>
                     </div>

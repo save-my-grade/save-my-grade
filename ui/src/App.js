@@ -8,6 +8,7 @@ import axios from "axios";
 import ProfilePage from "./pages/ProfilePage";
 import CoursePage from "./pages/CoursePage";
 import SheetPage from "./pages/SheetPage";
+import AdminCoursesPage from "./pages/AdminCoursesPage";
 
 function App() {
     const [cookies, setCookie, removeCookie] = useCookies(['token', 'id']);
@@ -59,6 +60,8 @@ function App() {
                               componentProps={{connectedUser}}/>
                 <PrivateRoute path="/sheet/:id" component={SheetPage} isLoggedIn={isLoggedIn}
                               componentProps={{connectedUser}}/>
+                <PrivateRoute path="/admin/courses" component={AdminCoursesPage} isLoggedIn={isLoggedIn}
+                              componentProps={{connectedUser}}/>
                 <Route render={() => <Redirect to={{pathname: "/home"}}/>}/>
             </Switch>
         </Router>
@@ -82,5 +85,10 @@ function PrivateRoute({component: Component, isLoggedIn, componentProps, ...rest
         />
     );
 }
+
+//function AdminRoutes({match, connectedUser}) {
+//
+//
+//}
 
 export default App;
