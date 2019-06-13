@@ -9,6 +9,8 @@ import ProfilePage from "./pages/ProfilePage";
 import CoursePage from "./pages/CoursePage";
 import SheetPage from "./pages/SheetPage";
 import AdminCoursesPage from "./pages/admin/AdminCoursesPage";
+import AdminHubPage from "./pages/admin/AdminHubPage";
+import AdminUsersPage from "./pages/admin/AdminUsersPage";
 
 function App() {
     const [cookies, setCookie, removeCookie] = useCookies(['token', 'id']);
@@ -54,13 +56,17 @@ function App() {
                     <LoginPage handleLogin={handleLogin}/>}/>
                 <PrivateRoute path="/home" component={HomePage} isLoggedIn={isLoggedIn}
                               componentProps={{connectedUser}}/>
-                <PrivateRoute path="/profile" component={ProfilePage} isLoggedIn={isLoggedIn}
+                <PrivateRoute path="/users/:id" component={ProfilePage} isLoggedIn={isLoggedIn}
                               componentProps={{handleLogout, connectedUser}}/>
                 <PrivateRoute path="/courses/:id" component={CoursePage} isLoggedIn={isLoggedIn}
                               componentProps={{connectedUser}}/>
                 <PrivateRoute path="/sheet/:id" component={SheetPage} isLoggedIn={isLoggedIn}
                               componentProps={{connectedUser}}/>
                 <PrivateRoute path="/admin/courses" component={AdminCoursesPage} isLoggedIn={isLoggedIn}
+                              componentProps={{connectedUser}}/>
+                <PrivateRoute path="/admin/users" component={AdminUsersPage} isLoggedIn={isLoggedIn}
+                              componentProps={{connectedUser}}/>
+                <PrivateRoute path="/admin" component={AdminHubPage} isLoggedIn={isLoggedIn}
                               componentProps={{connectedUser}}/>
                 <Route render={() => <Redirect to={{pathname: "/home"}}/>}/>
             </Switch>
