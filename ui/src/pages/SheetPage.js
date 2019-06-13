@@ -105,14 +105,14 @@ function SheetPage({match, connectedUser}) {
                     <EditSheetModal isActive={isEditSheetModalActive}
                                     connectedUser={connectedUser} sheet={sheet} toggle={handleEdit}/>
                     {(sheet.authorId === connectedUser.id || connectedUser.isAdmin) && (
-                        <div>
+                        <div className="buttons">
+                            <button onClick={handleEdit}
+                                    className="button is-outlined is-info">
+                                Modifier
+                            </button>
                             <button onClick={handleDelete}
                                     className="button is-danger is-outlined">
                                 Supprimer
-                            </button>
-                            <button onClick={handleEdit}
-                                    className="button is-outlined">
-                                Modifier
                             </button>
                         </div>
                     )}

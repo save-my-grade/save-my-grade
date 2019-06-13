@@ -13,6 +13,7 @@ POST          /api/login/token                     controllers.LoginController.t
 GET           /api/users                           controllers.UserController.getAllUsers
 POST          /api/users                           controllers.UserController.create(request: Request)
 GET           /api/users/:userId                   controllers.UserController.getUser(userId:Integer)
+PUT           /api/users/:userId                   controllers.UserController.editUser(request: Request, userId:Integer)
 
 # Sheets
 GET           /api/sheets/:sheetId                 controllers.SheetController.getSheet(sheetId:Integer)

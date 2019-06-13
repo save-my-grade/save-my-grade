@@ -33,6 +33,24 @@ public class UserController extends Controller {
         }
     }
 
+    public Result editUser(Http.Request request, Integer id) {
+        User user = User.find.byId(id);
+        if (user == null) {
+            return notFound("User does not exist");
+        }
+        User newUser;
+        try {
+            newUser = Json.fromJson(Util.requestBodyToJson(request), User.class);
+        } catch (Exception e) {
+            return badRequest(Util.createResponse(
+                    "Expecting Json data", false));
+        }
+        newUser.setId(id);
+        newUser.update("default");
+        JsonNode jsonObject = Json.toJson(newUser);
+        return ok(Util.createResponse(jsonObject, true));
+    }
+
     public Result getAllUsers() {
         List<User> users = User.find.all();
         JsonNode jsonObject = Json.toJson(users);
