@@ -39,6 +39,7 @@ function ProfilePage({match, handleLogout, connectedUser}) {
     }
 
     const [isEditing, setIsEditing] = useState(false);
+
     function editedCallback() {
         setIsEditing(false);
         fetchUser();
@@ -51,14 +52,18 @@ function ProfilePage({match, handleLogout, connectedUser}) {
                 <div className="page-content">
                     {
                         isEditing ? (
-                            <ProfileForm user={user} adminRights={connectedUser.isAdmin} successCallback={editedCallback}/>
+                            <ProfileForm user={user} adminRights={connectedUser.isAdmin}
+                                         successCallback={editedCallback}/>
                         ) : (
                             <React.Fragment>
                                 <section className="section">
                                     <h1 className="title">{isOwnProfile ? "Mon profil" : user.firstName ? "Profil de " + user.firstName : "Profil n°" + user.id}</h1>
-                                    <h3>{user.firstName}</h3>
-                                    {user.lastName && <h3>{user.lastName}</h3>}
-                                    <h3>{user.email}</h3>
+                                    <h3 className="subtitle"><b>Prénom : </b>{user.firstName}</h3>
+                                    {user.lastName && <h3 className="subtitle"><b>Nom : </b>{user.lastName}</h3>}
+                                    <h3 className="subtitle"><b>Email : </b>{user.email}</h3>
+                                    {connectedUser.isAdmin &&
+                                    <h3 className="subtitle"><b>Administrateur : </b>{user.isAdmin ? "Oui" : "Non"}
+                                    </h3>}
                                 </section>
                                 <section className="section">
                                     <div className="buttons">

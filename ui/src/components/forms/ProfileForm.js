@@ -53,6 +53,10 @@ function ProfileForm({user, adminRights, successCallback}) {
                         <Field type="email" name="email" className="input" placeholder="Email (obligatoire)"/>
                         <ErrorMessage name="email" component="div"/>
                         <div style={{marginTop: 10}}/>
+                        {adminRights && <React.Fragment>
+                            <Checkbox name="isAdmin"/>
+                            <div style={{marginTop: 10}}/>
+                        </React.Fragment>}
                         <button type="submit" disabled={isSubmitting}
                                 className={classNames("button", "is-info", {"is-loading": isSubmitting})}>
                             Valider les changements
@@ -66,3 +70,23 @@ function ProfileForm({user, adminRights, successCallback}) {
 }
 
 export default ProfileForm;
+
+function Checkbox(props) {
+    return (
+        <Field name={props.name}>
+            {({field, form}) => (
+                <label className="checkbox">
+                    <input
+                        type="checkbox"
+                        {...props}
+                        checked={field.value}
+                        onChange={() => {
+                            form.setFieldValue(props.name, !field.value);
+                        }}
+                    />
+                    Administrateur
+                </label>
+            )}
+        </Field>
+    );
+}
