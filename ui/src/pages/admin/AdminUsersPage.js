@@ -34,6 +34,7 @@ function AdminUsersPage({connectedUser}) {
 
     const [selectedUser, setSelectedUser] = useState(null);
 
+    document.body.style.cursor = "default";
     return (
         selectedUser ? (
             <Redirect to={"/users/" + selectedUser.id}/>
