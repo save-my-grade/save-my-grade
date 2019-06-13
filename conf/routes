@@ -19,13 +19,15 @@ POST          /api/sheets                          controllers.SheetController.c
 DELETE        /api/sheets/:sheetId                 controllers.SheetController.delete(sheetId:Integer)
 PUT           /api/sheets/:sheetId                 controllers.SheetController.editSheet(request: Request, sheetId:Integer)
 
+POST          /api/upload                          controllers.SheetController.uploadSheet(request: Request)
+
 # Course
 GET           /api/courses/:courseId               controllers.CourseController.getCourse(courseId:Integer)
 GET           /api/courses/:courseId/sheets        controllers.SheetController.getCourseSheets(courseId:Integer)
 GET           /api/courses                         controllers.CourseController.getAllCourses
 POST          /api/courses                         controllers.CourseController.createCourse(request: Request)
-
-POST          /api/upload                          controllers.SheetController.uploadSheet(request: Request)
+PUT           /api/courses/:courseId               controllers.CourseController.editCourse(request: Request, courseId:Integer)
+DELETE        /api/courses/:courseId               controllers.CourseController.delete(courseId:Integer)
 
 # Serve static assets under public directory
 GET           /*file                               controllers.FrontendController.assetOrDefault(file)
