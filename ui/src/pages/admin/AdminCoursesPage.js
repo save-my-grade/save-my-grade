@@ -62,43 +62,45 @@ function AdminCoursesPage({connectedUser}) {
     }
 
     return (
-        <React.Fragment>
+        <div>
             <NavBar connectedUser={connectedUser}/>
-            <h1 className="title" style={{paddingTop: 20}}>Gestion des matières</h1>
-            {
-                areCoursesLoading ? (
-                    <Loader/>
-                ) : (
-                    <div className="columns is-multiline">
-                        <div className="column">
-                            <h1 className="title is-4">Prépa Intégrée</h1>
-                            <CourseItems courses={courses} renameCourse={renameCourse} deleteCourse={deleteCourse}
-                                         cycle="prep"/>
-                        </div>
+            <div className="page-content">
+                <h1 className="title" style={{paddingTop: 40}}>Gestion des matières</h1>
+                {
+                    areCoursesLoading ? (
+                        <Loader/>
+                    ) : (
+                        <div className="columns is-multiline">
+                            <div className="column">
+                                <h1 className="title is-4">Prépa Intégrée</h1>
+                                <CourseItems courses={courses} renameCourse={renameCourse} deleteCourse={deleteCourse}
+                                             cycle="prep"/>
+                            </div>
 
-                        <div className="column">
-                            <h1 className="title is-4">CII</h1>
-                            <CourseItems courses={courses} renameCourse={renameCourse} deleteCourse={deleteCourse}
-                                         cycle="cii"/>
-                        </div>
+                            <div className="column">
+                                <h1 className="title is-4">CII</h1>
+                                <CourseItems courses={courses} renameCourse={renameCourse} deleteCourse={deleteCourse}
+                                             cycle="cii"/>
+                            </div>
 
-                        <div className="column">
-                            <h1 className="title is-4">Cycle Ingénieur</h1>
-                            <CourseItems courses={courses} renameCourse={renameCourse} deleteCourse={deleteCourse}
-                                         cycle="ing"/>
+                            <div className="column">
+                                <h1 className="title is-4">Cycle Ingénieur</h1>
+                                <CourseItems courses={courses} renameCourse={renameCourse} deleteCourse={deleteCourse}
+                                             cycle="ing"/>
+                            </div>
                         </div>
-                    </div>
-                )
-            }
-            <CourseCreator successCallback={fetchCourses}/>
+                    )
+                }
+                <CourseCreator successCallback={fetchCourses}/>
 
-            {selectedCourse &&
-            <CourseRenameModal isActive={isRenameModalActive} course={selectedCourse} toggle={() => {
-                setRenameModalActive(!isRenameModalActive);
-                if (!isRenameModalActive)
-                    setSelectedCourse(null)
-            }} renamedCallback={renamedCallback}/>}
-        </React.Fragment>
+                {selectedCourse &&
+                <CourseRenameModal isActive={isRenameModalActive} course={selectedCourse} toggle={() => {
+                    setRenameModalActive(!isRenameModalActive);
+                    if (!isRenameModalActive)
+                        setSelectedCourse(null)
+                }} renamedCallback={renamedCallback}/>}
+            </div>
+        </div>
     );
 }
 
