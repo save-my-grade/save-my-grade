@@ -8,7 +8,7 @@ import axios from "axios";
 import ProfilePage from "./pages/ProfilePage";
 import CoursePage from "./pages/CoursePage";
 import SheetPage from "./pages/SheetPage";
-import AdminCoursesPage from "./pages/AdminCoursesPage";
+import AdminCoursesPage from "./pages/admin/AdminCoursesPage";
 
 function App() {
     const [cookies, setCookie, removeCookie] = useCookies(['token', 'id']);

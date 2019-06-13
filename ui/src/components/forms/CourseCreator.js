@@ -1,11 +1,16 @@
+import PropTypes from 'prop-types'
 import React from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import axios from 'axios';
 import classNames from "classnames";
 
+CourseCreator.propTypes = {
+    successCallback: PropTypes.func.isRequired
+};
+
 function CourseCreator({successCallback}) {
     return (
-        <div className="box" style={{width: 500, marginTop: 40}}>
+        <div className="box" style={{width: '100%', marginTop: 40}}>
             <Formik
                 initialValues={{name: '', cycle: ''}}
                 validate={values => {
