@@ -16,6 +16,10 @@ function AdminHubPage({connectedUser}) {
                 <NavLink to="/admin/courses">
                     <h2 className="subtitle is-4 has-text-link">Gestion des matières</h2>
                 </NavLink>
+                <div style={{height: 20}}/>
+                <NavLink to="/admin/users">
+                    <h2 className="subtitle is-4 has-text-link">Gestion des utilisateurs</h2>
+                </NavLink>
             </div>
         </div>
     );
