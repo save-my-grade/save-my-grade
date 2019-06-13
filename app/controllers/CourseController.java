@@ -40,5 +40,23 @@ public class CourseController extends Controller {
         JsonNode jsonObject = Json.toJson(course);
         return created(Util.createResponse(jsonObject, true));
     }
+
+    public Result editCourse(Http.Request request, Integer id) {
+        Course course = Course.find.byId(id);
+        if (course == null) {
+            return notFound("Course does not exist");
+        }
+        Course newCourse;
+        try {
+            newCourse = Json.fromJson(Util.requestBodyToJson(request), Course.class);
+        } catch (Exception e) {
+            return badRequest(Util.createResponse(
+                    "Expecting Json data", false));
+        }
+        newCourse.setId(id);
+        newCourse.update("default");
+        JsonNode jsonObject = Json.toJson(newCourse);
+        return ok(Util.createResponse(jsonObject, true));
+    }
 }
  

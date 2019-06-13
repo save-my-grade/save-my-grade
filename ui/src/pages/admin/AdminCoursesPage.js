@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Loader from "../../components/Loader";
 import CourseCreator from "../../components/forms/CourseCreator";
+import CourseRenameModal from "../../components/CourseRenameModal";
 
 AdminCoursesPage.propTypes = {
     connectedUser: PropTypes.object.isRequired
@@ -32,6 +33,19 @@ function AdminCoursesPage({connectedUser}) {
         })
     }
 
+    const [isRenameModalActive, setRenameModalActive] = useState(false);
+    const [selectedCourse, setSelectedCourse] = useState(null);
+
+    function renameCourse(course) {
+        setSelectedCourse(course);
+        setRenameModalActive(true);
+    }
+
+    function renamedCallback() {
+        fetchCourses();
+        setSelectedCourse(null);
+    }
+
     return (
         <React.Fragment>
             <NavBar connectedUser={connectedUser}/>
@@ -42,38 +56,48 @@ function AdminCoursesPage({connectedUser}) {
                     <div className="columns is-multiline">
                         <div className="column">
                             <h1 className="title is-4">Prépa Intégrée</h1>
-                            <CourseItems courses={courses} cycle="prep"/>
+                            <CourseItems courses={courses} renameCourse={renameCourse} cycle="prep"/>
                         </div>
 
                         <div className="column">
                             <h1 className="title is-4">CII</h1>
-                            <CourseItems courses={courses} cycle="cii"/>
+                            <CourseItems courses={courses} renameCourse={renameCourse} cycle="cii"/>
                         </div>
 
                         <div className="column">
                             <h1 className="title is-4">Cycle Ingénieur</h1>
-                            <CourseItems courses={courses} cycle="ing"/>
+                            <CourseItems courses={courses} renameCourse={renameCourse} cycle="ing"/>
                         </div>
                     </div>
                 )
             }
             <CourseCreator successCallback={fetchCourses}/>
+
+            {selectedCourse &&
+            <CourseRenameModal isActive={isRenameModalActive} course={selectedCourse} toggle={() => {
+                setRenameModalActive(!isRenameModalActive);
+                if (!isRenameModalActive)
+                    setSelectedCourse(null)
+            }} renamedCallback={renamedCallback}/>}
         </React.Fragment>
     );
 }
 
 CourseItems.propTypes = {
     courses: PropTypes.array.isRequired,
-    cycle: PropTypes.string.isRequired
+    cycle: PropTypes.string.isRequired,
+    renameCourse: PropTypes.func.isRequired
 };
 
-function CourseItems({courses, cycle}) {
+function CourseItems({courses, cycle, renameCourse}) {
     return (
         <table className="table">
             <tbody>
             {
                 courses.filter(course => course.cycle === cycle).map((course) =>
-                    <CourseItem name={course.name} key={course.id}/>
+                    <CourseItem course={course} renameCourse={() => {
+                        renameCourse(course)
+                    }} key={course.id}/>
                 )
             }
             </tbody>
@@ -82,15 +106,16 @@ function CourseItems({courses, cycle}) {
 }
 
 CourseItem.propTypes = {
-    name: PropTypes.string.isRequired
+    course: PropTypes.object.isRequired,
+    renameCourse: PropTypes.func.isRequired
 };
 
-function CourseItem({name}) {
+function CourseItem({course, renameCourse}) {
     return (
         <tr>
-            <th>{name}</th>
+            <th>{course.name}</th>
             <td>
-                <button className="button is-primary">Renommer</button>
+                <button className="button is-primary" onClick={() => renameCourse(course)}>Renommer</button>
             </td>
             <td>
                 <button className="button is-danger">Supprimer</button>
