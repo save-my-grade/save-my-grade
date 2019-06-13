@@ -33,6 +33,20 @@ function AdminCoursesPage({connectedUser}) {
         })
     }
 
+    function deleteCourse(id) {
+        setAreCoursesLoading(true);
+        axios({
+            method: 'delete',
+            url: '/api/courses/' + id,
+        })
+            .then(() => {
+                fetchCourses();
+            }).catch(() => {
+            alert("Vous ne pouvez pas supprimer une matière qui contient des fiches.");
+            fetchCourses();
+        })
+    }
+
     const [isRenameModalActive, setRenameModalActive] = useState(false);
     const [selectedCourse, setSelectedCourse] = useState(null);
 
@@ -56,17 +70,20 @@ function AdminCoursesPage({connectedUser}) {
                     <div className="columns is-multiline">
                         <div className="column">
                             <h1 className="title is-4">Prépa Intégrée</h1>
-                            <CourseItems courses={courses} renameCourse={renameCourse} cycle="prep"/>
+                            <CourseItems courses={courses} renameCourse={renameCourse} deleteCourse={deleteCourse}
+                                         cycle="prep"/>
                         </div>
 
                         <div className="column">
                             <h1 className="title is-4">CII</h1>
-                            <CourseItems courses={courses} renameCourse={renameCourse} cycle="cii"/>
+                            <CourseItems courses={courses} renameCourse={renameCourse} deleteCourse={deleteCourse}
+                                         cycle="cii"/>
                         </div>
 
                         <div className="column">
                             <h1 className="title is-4">Cycle Ingénieur</h1>
-                            <CourseItems courses={courses} renameCourse={renameCourse} cycle="ing"/>
+                            <CourseItems courses={courses} renameCourse={renameCourse} deleteCourse={deleteCourse}
+                                         cycle="ing"/>
                         </div>
                     </div>
                 )
@@ -86,18 +103,18 @@ function AdminCoursesPage({connectedUser}) {
 CourseItems.propTypes = {
     courses: PropTypes.array.isRequired,
     cycle: PropTypes.string.isRequired,
-    renameCourse: PropTypes.func.isRequired
+    renameCourse: PropTypes.func.isRequired,
+    deleteCourse: PropTypes.func.isRequired
 };
 
-function CourseItems({courses, cycle, renameCourse}) {
+function CourseItems({courses, cycle, renameCourse, deleteCourse}) {
     return (
         <table className="table">
             <tbody>
             {
                 courses.filter(course => course.cycle === cycle).map((course) =>
-                    <CourseItem course={course} renameCourse={() => {
-                        renameCourse(course)
-                    }} key={course.id}/>
+                    <CourseItem course={course} renameCourse={renameCourse} deleteCourse={deleteCourse}
+                                key={course.id}/>
                 )
             }
             </tbody>
@@ -107,10 +124,11 @@ function CourseItems({courses, cycle, renameCourse}) {
 
 CourseItem.propTypes = {
     course: PropTypes.object.isRequired,
-    renameCourse: PropTypes.func.isRequired
+    renameCourse: PropTypes.func.isRequired,
+    deleteCourse: PropTypes.func.isRequired
 };
 
-function CourseItem({course, renameCourse}) {
+function CourseItem({course, renameCourse, deleteCourse}) {
     return (
         <tr>
             <th>{course.name}</th>
@@ -118,7 +136,7 @@ function CourseItem({course, renameCourse}) {
                 <button className="button is-primary" onClick={() => renameCourse(course)}>Renommer</button>
             </td>
             <td>
-                <button className="button is-danger">Supprimer</button>
+                <button className="button is-danger" onClick={() => deleteCourse(course.id)}>Supprimer</button>
             </td>
         </tr>
     )

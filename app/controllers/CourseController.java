@@ -58,5 +58,17 @@ public class CourseController extends Controller {
         JsonNode jsonObject = Json.toJson(newCourse);
         return ok(Util.createResponse(jsonObject, true));
     }
+
+    public Result delete(Integer id) {
+        Course course = Course.find.byId(id);
+        if (course == null) {
+            return notFound("Course does not exist");
+        }
+        if (Sheet.find.query().where().eq("course_id", id).exists()) {
+            return unauthorized("You can't delete a course with sheets");
+        }
+        course.delete();
+        return ok("course has been deleted");
+    }
 }
  
