@@ -56,7 +56,7 @@ function App() {
                     <LoginPage handleLogin={handleLogin}/>}/>
                 <PrivateRoute path="/home" component={HomePage} isLoggedIn={isLoggedIn}
                               componentProps={{connectedUser}}/>
-                <PrivateRoute path="/profile" component={ProfilePage} isLoggedIn={isLoggedIn}
+                <PrivateRoute path="/users/:id" component={ProfilePage} isLoggedIn={isLoggedIn}
                               componentProps={{handleLogout, connectedUser}}/>
                 <PrivateRoute path="/courses/:id" component={CoursePage} isLoggedIn={isLoggedIn}
                               componentProps={{connectedUser}}/>

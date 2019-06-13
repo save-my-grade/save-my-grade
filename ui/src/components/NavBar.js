@@ -57,7 +57,7 @@ function NavBar({connectedUser}) {
                         {connectedUser.isAdmin && <NavLink to="/admin" className="navbar-item">
                             Espace administrateur
                         </NavLink>}
-                        <NavLink to="/profile" className="navbar-item">
+                        <NavLink to={"/users/" + connectedUser.id} className="navbar-item">
                             <Avatar name={connectedUser.firstName} round={true} size={40}/>
                         </NavLink>
                     </div>
