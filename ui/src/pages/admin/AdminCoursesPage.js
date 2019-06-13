@@ -5,6 +5,7 @@ import axios from 'axios';
 import Loader from "../../components/Loader";
 import CourseCreator from "../../components/forms/CourseCreator";
 import CourseRenameModal from "../../components/CourseRenameModal";
+import {NavLink} from "react-router-dom";
 
 AdminCoursesPage.propTypes = {
     connectedUser: PropTypes.object.isRequired
@@ -63,6 +64,7 @@ function AdminCoursesPage({connectedUser}) {
     return (
         <React.Fragment>
             <NavBar connectedUser={connectedUser}/>
+            <h1 className="title" style={{paddingTop: 20}}>Gestion des matières</h1>
             {
                 areCoursesLoading ? (
                     <Loader/>
@@ -131,7 +133,7 @@ CourseItem.propTypes = {
 function CourseItem({course, renameCourse, deleteCourse}) {
     return (
         <tr>
-            <th>{course.name}</th>
+            <th><NavLink to={"/courses/" + course.id}>{course.name}</NavLink></th>
             <td>
                 <button className="button is-primary" onClick={() => renameCourse(course)}>Renommer</button>
             </td>

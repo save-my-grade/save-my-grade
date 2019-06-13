@@ -43,12 +43,14 @@ function CourseCreator({successCallback}) {
                         <Field type="name" name="name" className="input" placeholder="Nom de la matière"/>
                         <ErrorMessage name="name" component="div"/>
                         <div style={{marginTop: 10}}/>
-                        <Field name="cycle" component="select" placeHolder="Cycle" className="select">
-                            <option value="" disabled hidden>Cycle</option>
-                            <option value={"prep"}>Prépa</option>
-                            <option value={"cii"}>CII</option>
-                            <option value={"ing"}>Ingé</option>
-                        </Field>
+                        <div className="select">
+                            <Field name="cycle" component="select" placeholder="Cycle">
+                                <option value="" disabled hidden>Cycle</option>
+                                <option value={"prep"}>Prépa</option>
+                                <option value={"cii"}>CII</option>
+                                <option value={"ing"}>Ingé</option>
+                            </Field>
+                        </div>
                         <ErrorMessage name="cycle" component="div"/>
                         <div style={{marginTop: 10}}/>
                         <button type="submit" disabled={isSubmitting}
