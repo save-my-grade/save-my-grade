@@ -7,6 +7,8 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 
+import java.util.List;
+
 public class UserController extends Controller {
     public Result create(Http.Request request) {
         JsonNode json = request.body().asJson();
@@ -19,6 +21,7 @@ public class UserController extends Controller {
         JsonNode jsonObject = Json.toJson(user);
         return created(Util.createResponse(jsonObject, true));
     }
+
     public Result getUser(Integer id) {
         User user = User.find.byId(id);
         JsonNode jsonObject = Json.toJson(user);
@@ -27,5 +30,11 @@ public class UserController extends Controller {
         } else {
             return ok(Util.createResponse(jsonObject, true));
         }
+    }
+
+    public Result getAllUsers() {
+        List<User> users = User.find.all();
+        JsonNode jsonObject = Json.toJson(users);
+        return ok(Util.createResponse(jsonObject, true));
     }
 }
